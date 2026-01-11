@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Async & Concurrency - Mintas</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <div class="layout">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="brand">
+                <span>Mintas</span>
+            </div>
+
+            <div class="nav">
+                <a href="../index.html">Overview</a>
+
+                <div class="nav-header">Getting Started</div>
+                <a href="../guides/install.html">Installation</a>
+                <a href="../guides/quickstart.html">Quick Start</a>
+
+                <div class="nav-header">Language</div>
+                <a href="syntax.html">Syntax & Types</a>
+                <a href="variables.html">Variables & Constants</a>
+                <a href="collections.html">Arrays & Tables</a>
+                <a href="control-flow.html">Control Flow</a>
+                <a href="functions.html">Functions</a>
+                <a href="classes.html">Classes & OOP</a>
+                <a href="async.html" class="active">Async & Concurrency</a>
+
+                <div class="nav-header">Web Development</div>
+                <a href="dew.html">Dew Framework</a>
+                <a href="dew-ui.html">Interactive UI</a>
+
+                <div class="nav-header">Standard Library</div>
+                <a href="../stdlib/index.html">All Modules</a>
+                <a href="../stdlib/math.html">Math</a>
+                <a href="../stdlib/datetime.html">DateTime</a>
+                <a href="../stdlib/json.html">JSON</a>
+                <a href="../stdlib/files.html">SysFiles</a>
+                <a href="../stdlib/system.html">System</a>
+                <a href="../stdlib/networking.html">Networking</a>
+                <a href="../stdlib/database.html">Database</a>
+                <a href="../stdlib/dew.html">Dew Web</a>
+                <a href="../stdlib/canvas.html">Canvas</a>
+                <a href="../stdlib/security.html">Security</a>
+                <a href="../stdlib/formats.html">Data Formats</a>
+                <a href="../stdlib/protocols.html">Protocols</a>
+                <a href="../stdlib/utilities.html">Utilities</a>
+                <a href="../stdlib/ai.html">AI</a>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <h1>Async Functions & Concurrency</h1>
+            <p>Mintas supports asynchronous programming and concurrent execution through multiple approaches.</p>
+
+            <h2>Worker Threads</h2>
+            <p>The <code>worker</code> module provides thread-based concurrency for CPU-intensive tasks.</p>
+
+            <h3>Creating Workers</h3>
+            <pre><code>include worker
+
+# Create a worker thread
+w = worker.create(fn():
+    # This runs in a separate thread
+    result = heavy_computation()
+    return result
+end)
+
+# Start the worker
+worker.start(w)
+
+# Do other work while worker runs
+say("Main thread continues...")
+
+# Wait for worker to complete
+result = worker.join(w)
+say("Worker result: " + result)</code></pre>
+
+            <h3>Multiple Workers</h3>
+            <pre><code>include worker
+
+workers = []
+
+# Create multiple workers
+for i in 1 to 5:
+    w = worker.create(fn():
+        return process_data(i)
+    end)
+    worker.start(w)
+    workers.push(w)
+end
+
+# Collect all results
+results = []
+for w in workers:
+    results.push(worker.join(w))
+end</code></pre>
+
+            <h2>Async Web Framework (Dew)</h2>
+            <p>The Dew web framework is built on Tokio and Axum, providing async HTTP handling by default.</p>
+
+            <pre><code>include dew
+
+app = dew.create()
+
+# Async route handlers
+dew.get(app, "/api/data", fn(req, res):
+    # This runs asynchronously
+    data = fetch_from_database()
+    res.json(data)
+end)
+
+# Multiple concurrent requests are handled automatically
+dew.listen(app, 3000)</code></pre>
+
+            <h2>Built-in Task Functions</h2>
+            <p>Mintas has built-in <code>task</code> functions for async operations in the Dew framework.</p>
+
+            <h3>Creating Async Tasks</h3>
+            <pre><code>include dew
+
+app = dew.create()
+
+# Create an async background task
+task_id = dew.task("process_data", fn():
+    # This runs asynchronously in the background
+    result = heavy_computation()
+    save_to_database(result)
+end)
+
+say("Task scheduled: " + task_id)</code></pre>
+
+            <h3>Scheduled Tasks (Cron)</h3>
+            <pre><code>include dew
+
+app = dew.create()
+
+# Schedule a task with cron expression
+dew.schedule("0 */5 * * *", "cleanup_task", fn():
+    # Runs every 5 minutes
+    cleanup_old_data()
+end)
+
+# Daily task at midnight
+dew.schedule("0 0 * * *", "daily_report", fn():
+    generate_daily_report()
+end)</code></pre>
+
+            <h3>Task Management</h3>
+            <pre><code>include dew
+
+# Create task
+task = dew.task("email_sender", fn():
+    send_emails()
+end)
+
+# Task returns an object with:
+# - id: unique task identifier
+# - status: "scheduled", "running", "completed"
+# - created_at: timestamp
+
+say("Task ID: " + task.id)
+say("Status: " + task.status)</code></pre>
+
+            <h2>Async Networking</h2>
+            <p>Network operations in Mintas are non-blocking when using the appropriate modules.</p>
+
+            <h3>HTTP Requests</h3>
+            <pre><code>include requests
+
+# Non-blocking HTTP request
+response = requests.get("https://api.example.com/data")
+say(response.body)</code></pre>
+
+            <h3>WebSocket</h3>
+            <pre><code>include sockets
+
+# Async WebSocket connection
+ws = sockets.websocket("wss://example.com/ws")
+
+sockets.on_message(ws, fn(message):
+    # Handle messages asynchronously
+    say("Received: " + message)
+end)
+
+sockets.send(ws, "Hello!")</code></pre>
+
+            <h2>Cluster Module</h2>
+            <p>For process-based parallelism, use the <code>cluster</code> module.</p>
+
+            <pre><code>include cluster
+
+if (cluster.is_master()):
+    # Master process
+    say("Master process started")
+    
+    # Fork worker processes
+    for i in 1 to 4:
+        cluster.fork()
+    end
+else:
+    # Worker process
+    say("Worker " + cluster.worker_id() + " started")
+    
+    # Handle work
+    handle_requests()
+end</code></pre>
+
+            <h2>Event-Driven Programming</h2>
+            <p>The <code>events</code> module provides async event handling.</p>
+
+            <pre><code>include events
+
+emitter = events.create()
+
+# Register async event handlers
+events.on(emitter, "data", fn(data):
+    process_data(data)
+end)
+
+events.on(emitter, "error", fn(error):
+    say("Error: " + error)
+end)
+
+# Emit events (non-blocking)
+events.emit(emitter, "data", {"key": "value"})</code></pre>
+
+            <h2>Timer & Scheduling</h2>
+            <p>Schedule async tasks with the <code>timer</code> and <code>cron</code> modules.</p>
+
+            <h3>Delayed Execution</h3>
+            <pre><code>include timer
+
+# Non-blocking sleep
+timer.sleep(1000)  # 1 second
+
+# Timeout
+timer.timeout(5000, fn():
+    say("This runs after 5 seconds")
+end)</code></pre>
+
+            <h3>Scheduled Tasks</h3>
+            <pre><code>include cron
+
+# Run task every day at 9 AM
+cron.schedule("0 9 * * *", fn():
+    send_daily_report()
+end)
+
+# Run task every 5 minutes
+cron.schedule("*/5 * * * *", fn():
+    check_system_health()
+end)</code></pre>
+
+            <h2>Queue for Async Processing</h2>
+            <p>Use queues for async task processing.</p>
+
+            <pre><code>include queue
+include worker
+
+# Create a task queue
+q = queue.create()
+
+# Producer
+for i in 1 to 100:
+    queue.push(q, {"task": i})
+end
+
+# Consumer workers
+workers = []
+for i in 1 to 4:
+    w = worker.create(fn():
+        while (not queue.is_empty(q)):
+            task = queue.pop(q)
+            process_task(task)
+        end
+    end)
+    worker.start(w)
+    workers.push(w)
+end
+
+# Wait for all workers
+for w in workers:
+    worker.join(w)
+end</code></pre>
+
+            <h2>Best Practices</h2>
+
+            <div class="feature-card">
+                <h3>1. Use Workers for CPU-Intensive Tasks</h3>
+                <p>Offload heavy computations to worker threads to keep the main thread responsive.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>2. Leverage Async I/O</h3>
+                <p>Network and file operations are automatically async in Dew and networking modules.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>3. Handle Errors Gracefully</h3>
+                <p>Always use error handlers with async operations to prevent silent failures.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>4. Avoid Blocking Operations</h3>
+                <p>Use <code>timer.sleep()</code> instead of busy-waiting loops.</p>
+            </div>
+
+            <h2>Performance Tips</h2>
+            <ul>
+                <li><strong>Worker Pool:</strong> Reuse workers instead of creating new ones for each task</li>
+                <li><strong>Cluster Mode:</strong> Use one worker per CPU core for optimal performance</li>
+                <li><strong>Event Batching:</strong> Batch multiple events together to reduce overhead</li>
+                <li><strong>Queue Size:</strong> Limit queue sizes to prevent memory issues</li>
+            </ul>
+
+        </main>
+    </div>
+    <script src="../js/main.js"></script>
+</body>
+
+</html>

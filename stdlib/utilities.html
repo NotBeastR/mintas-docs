@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Utilities - Mintas</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <div class="layout">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="brand">
+                <span>Mintas</span>
+            </div>
+
+            <div class="nav">
+                <a href="../index.html">Overview</a>
+                <div class="nav-header">Standard Library</div>
+                <a href="index.html">All Modules</a>
+                <a href="math.html">Math</a>
+                <a href="files.html">SysFiles</a>
+                <a href="datetime.html">DateTime</a>
+                <a href="json.html">JSON</a>
+                <a href="database.html">Database</a>
+                <a href="canvas.html">Canvas</a>
+                <a href="dew.html">Dew</a>
+                <a href="networking.html">Networking</a>
+                <a href="security.html">Security</a>
+                <a href="system.html">System</a>
+                <a href="formats.html">Data Formats</a>
+                <a href="protocols.html">Protocols</a>
+                <a href="utilities.html" class="active">Utilities</a>
+                <a href="ai.html">AI</a>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <h1>Utilities</h1>
+            <p>A collection of helper modules for CLI, validation, caching, and more.</p>
+
+            <h2>CLI Module</h2>
+            <p>Tools for building terminal applications, prompts, and progress bars.</p>
+            <pre><code>include mycli as cli</code></pre>
+            <table class="methods-table">
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>prompt(msg, [default])</code></td>
+                        <td>Prompts user for input.</td>
+                        <td><code>let name = cli.prompt("Name")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>confirm(msg)</code></td>
+                        <td>Asks for confirmation (y/n).</td>
+                        <td><code>if cli.confirm("Sure?") { ... }</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>table(data)</code></td>
+                        <td>Prints a formatted table.</td>
+                        <td><code>cli.table([["ID", "Name"], [1, "Alice"]])</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>success(msg)</code></td>
+                        <td>Prints a success message in green.</td>
+                        <td><code>cli.success("Installed!")</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Colors Module</h2>
+            <p>Terminal text styling and colors.</p>
+            <pre><code>include colors</code></pre>
+            <table class="methods-table">
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>red(text)</code></td>
+                        <td>Returns text wrapped in red ANSI codes.</td>
+                        <td><code>print(colors.red("Error"))</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>bold(text)</code></td>
+                        <td>Returns bold text.</td>
+                        <td><code>print(colors.bold("Title"))</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Validation Module</h2>
+            <p>Input validation for various formats.</p>
+            <pre><code>include validate</code></pre>
+            <table class="methods-table">
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>email(str)</code></td>
+                        <td>Validates email format.</td>
+                        <td><code>validate.email("test@test.com")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>url(str)</code></td>
+                        <td>Validates URL.</td>
+                        <td><code>validate.url("https://mintas.dev")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>creditcard(str)</code></td>
+                        <td>Validates credit card using Luhn algorithm.</td>
+                        <td><code>validate.creditcard("...")</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Cache & Queue</h2>
+            <p>In-memory data management.</p>
+            <pre><code>include cache
+include queue</code></pre>
+            <table class="methods-table">
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>cache.set(key, val, [ttl_ms])</code></td>
+                        <td>Stores a value in cache.</td>
+                        <td><code>cache.set("token", "123", 3600000)</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>cache.get(key, [default])</code></td>
+                        <td>Retrieves a value from cache.</td>
+                        <td><code>cache.get("token")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>queue.push(q, val)</code></td>
+                        <td>Adds a value to a named queue.</td>
+                        <td><code>queue.push("jobs", {id: 1})</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>queue.pop(q)</code></td>
+                        <td>Removes and returns front value.</td>
+                        <td><code>let job = queue.pop("jobs")</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Algorithms Module</h2>
+            <p>Common computer science algorithms.</p>
+            <pre><code>include algorithm as algo</code></pre>
+            <table class="methods-table">
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>sort(array)</code></td>
+                        <td>Sorts an array (Quicksort).</td>
+                        <td><code>algo.sort([3, 1, 2])</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>fibonacci(n)</code></td>
+                        <td>Returns the n-th Fibonacci number.</td>
+                        <td><code>algo.fibonacci(10)</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>levenshtein(s1, s2)</code></td>
+                        <td>Calculates string edit distance.</td>
+                        <td><code>algo.levenshtein("cat", "bat")</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Events Module</h2>
+            <p>Event emitter pattern.</p>
+            <pre><code>include events</code></pre>
+            <table class="methods-table">
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>on(event, handler)</code></td>
+                        <td>Registers an event listener.</td>
+                        <td><code>events.on("ready", fn)</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>emit(event, data)</code></td>
+                        <td>Triggers an event.</td>
+                        <td><code>events.emit("ready", {t: 1})</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Fun Utilities</h2>
+            <p>Jokes, ASCII art, and more.</p>
+            <pre><code>include asjokes as fun</code></pre>
+            <table class="methods-table">
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>joke()</code></td>
+                        <td>Returns a random programmer joke.</td>
+                        <td><code>print(fun.joke())</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>cowsay(msg)</code></td>
+                        <td>Returns a message in a cow speech bubble.</td>
+                        <td><code>print(fun.cowsay("Hi"))</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </main>
+    </div>
+    <script src="../js/main.js"></script>
+</body>
+
+</html>

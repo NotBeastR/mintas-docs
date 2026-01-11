@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DateTime Module - Mintas</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <div class="layout">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="brand">
+                <span>Mintas</span>
+            </div>
+
+            <div class="nav">
+                <a href="../index.html">Overview</a>
+
+                <div class="nav-header">Standard Library</div>
+                <a href="index.html">All Modules</a>
+                <a href="math.html">Math</a>
+                <a href="files.html">SysFiles</a>
+                <a href="datetime.html" class="active">DateTime</a>
+                <a href="json.html">JSON</a>
+                <a href="database.html">Database</a>
+                <a href="canvas.html">Canvas</a>
+                <a href="dew.html">Dew</a>
+                <a href="networking.html">Networking</a>
+                <a href="security.html">Security</a>
+                <a href="system.html">System</a>
+                <a href="formats.html">Data Formats</a>
+                <a href="protocols.html">Protocols</a>
+                <a href="utilities.html">Utilities</a>
+                <a href="ai.html">AI</a>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <h1>DateTime Module</h1>
+            <p>The <code>datetime</code> module provides tools for working with dates and times.</p>
+
+            <h2>Importing</h2>
+            <pre><code>include datetime</code></pre>
+
+            <h2>Current Time</h2>
+            <table class="methods-table">
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>now()</code></td>
+                        <td>Returns current local timestamp (unix float).</td>
+                        <td><code>let t = datetime.now()</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>utcnow()</code></td>
+                        <td>Returns current UTC timestamp.</td>
+                        <td><code>let t = datetime.utcnow()</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>today()</code></td>
+                        <td>Returns timestamp for midnight today.</td>
+                        <td><code>let t = datetime.today()</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Formatting & Parsing</h2>
+            <table class="methods-table">
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>strftime(ts, format)</code></td>
+                        <td>Formats a timestamp as a string.</td>
+                        <td><code>datetime.strftime(t, "%Y-%m-%d")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>strptime(str, format)</code></td>
+                        <td>Parses a string into a timestamp.</td>
+                        <td><code>datetime.strptime("2023-01-01", "%Y-%m-%d")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>isoformat(ts)</code></td>
+                        <td>Formats timestamp as ISO 8601 string.</td>
+                        <td><code>datetime.isoformat(t)</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Calculations</h2>
+            <table class="methods-table">
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>add_days(ts, n)</code></td>
+                        <td>Adds n days to timestamp.</td>
+                        <td><code>let tomorrow = datetime.add_days(t, 1)</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>diff_days(ts1, ts2)</code></td>
+                        <td>Returns difference in days.</td>
+                        <td><code>let days = datetime.diff_days(t1, t2)</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </main>
+    </div>
+    <script src="../js/main.js"></script>
+</body>
+
+</html>

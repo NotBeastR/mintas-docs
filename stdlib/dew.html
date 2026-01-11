@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dew Framework - Mintas</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <div class="layout">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="brand">
+                <span>Mintas</span>
+            </div>
+
+            <div class="nav">
+                <a href="../index.html">Overview</a>
+
+                <div class="nav-header">Standard Library</div>
+                <a href="index.html">All Modules</a>
+                <a href="math.html">Math</a>
+                <a href="files.html">SysFiles</a>
+                <a href="datetime.html">DateTime</a>
+                <a href="json.html">JSON</a>
+                <a href="database.html">Database</a>
+                <a href="canvas.html">Canvas</a>
+                <a href="dew.html" class="active">Dew</a>
+                <a href="networking.html">Networking</a>
+                <a href="security.html">Security</a>
+                <a href="system.html">System</a>
+                <a href="formats.html">Data Formats</a>
+                <a href="protocols.html">Protocols</a>
+                <a href="utilities.html">Utilities</a>
+                <a href="ai.html">AI</a>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <h1>Dew Web Framework</h1>
+            <p>The <code>dew</code> module is a powerful, integrated web server and framework for Mintas. It supports
+                routing, middleware, templates, static file serving, and databases.</p>
+
+            <h2>Importing</h2>
+            <pre><code>include dew</code></pre>
+
+            <h2>Server Lifecycle</h2>
+            <table class="methods-table">
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>create_server(options)</code></td>
+                        <td>Creates a new server configuration. Options: port, host, debug.</td>
+                        <td><code>let app = dew.create_server({port: 3000, debug: true})</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>serve(server)</code></td>
+                        <td>Starts the server. This function blocks.</td>
+                        <td><code>dew.serve(app)</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Routing</h2>
+            <p>Routes map HTTP methods and paths to handler functions.</p>
+            <table class="methods-table">
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>get(path, handler)</code></td>
+                        <td>Registers a GET route.</td>
+                        <td><code>app.get("/", fn(req) { return dew.text("Hello") })</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>post(path, handler)</code></td>
+                        <td>Registers a POST route.</td>
+                        <td><code>app.post("/submit", fn(req) { ... })</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>static(url, dir)</code></td>
+                        <td>Serves static files from a directory.</td>
+                        <td><code>app.static("/assets", "./public")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>use(handler)</code></td>
+                        <td>Registers middleware that runs for every request.</td>
+                        <td><code>app.use(logger_middleware)</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Request Object</h2>
+            <p>The handler function receives a request object (often called `req` or `getback`).</p>
+            <ul>
+                <li><code>req.body</code> - Raw body string.</li>
+                <li><code>req.json</code> - Parsed JSON object (if content-type is json).</li>
+                <li><code>req.query</code> - Table of query parameters.</li>
+                <li><code>req.params</code> - Table of URL parameters (e.g. /user/:id).</li>
+                <li><code>req.headers</code> - Table of request headers.</li>
+            </ul>
+
+            <h2>Response Helpers</h2>
+            <table class="methods-table">
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>text(str, status)</code></td>
+                        <td>Returns a plain text response.</td>
+                        <td><code>return dew.text("OK", 200)</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>json(obj, status)</code></td>
+                        <td>Returns a JSON response.</td>
+                        <td><code>return dew.json({msg: "Hi"}, 200)</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>html(str, status)</code></td>
+                        <td>Returns an HTML response.</td>
+                        <td><code>return dew.html("<h1>Hi</h1>", 200)</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>file(path)</code></td>
+                        <td>Returns a file download.</td>
+                        <td><code>return dew.file("./report.pdf")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>redirect(url)</code></td>
+                        <td>Redirects to another URL.</td>
+                        <td><code>return dew.redirect("/login")</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Database & Magic</h2>
+            <table class="methods-table">
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>query(config, sql, params)</code></td>
+                        <td>Executes a SQL query (SQLite/Postgres). Returns array of rows.</td>
+                        <td><code>dew.query(db_conf, "SELECT * FROM users", [])</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>hash_password(pwd)</code></td>
+                        <td>Securely hashes a password using Bcrypt.</td>
+                        <td><code>let h = dew.hash_password("secret")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>verify_password(pwd, hash)</code></td>
+                        <td>Verifies a password against a hash.</td>
+                        <td><code>if dew.verify_password("secret", h) { ... }</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>uuid()</code></td>
+                        <td>Generates a random UUID v4 string.</td>
+                        <td><code>let id = dew.uuid()</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </main>
+    </div>
+    <script src="../js/main.js"></script>
+</body>
+
+</html>

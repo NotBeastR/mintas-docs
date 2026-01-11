@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Installation - Mintas</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <div class="layout">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="brand">
+                <span>Mintas</span>
+            </div>
+
+            <div class="nav">
+                <a href="../index.html">Overview</a>
+
+                <div class="nav-header">Getting Started</div>
+                <a href="install.html" class="active">Installation</a>
+                <a href="quickstart.html">Quick Start</a>
+
+                <div class="nav-header">Language</div>
+                <a href="../language/syntax.html">Syntax & Types</a>
+                <a href="../language/variables.html">Variables & Constants</a>
+                <a href="../language/collections.html">Arrays & Tables</a>
+                <a href="../language/control-flow.html">Control Flow</a>
+                <a href="../language/functions.html">Functions</a>
+                <a href="../language/classes.html">Classes & OOP</a>
+
+                <div class="nav-header">Web Development</div>
+                <a href="../language/dew.html">Dew Framework</a>
+                <a href="../language/dew-ui.html">Interactive UI</a>
+
+                <div class="nav-header">Standard Library</div>
+                <a href="../stdlib/index.html">All Modules</a>
+                <a href="../stdlib/math.html">Math</a>
+                <a href="../stdlib/files.html">SysFiles</a>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <h1>Installation</h1>
+            <p>Installing Mintas is straightforward. Depending on your operating system, download the appropriate
+                installer below.</p>
+
+            <div class="feature-card"
+                style="text-align: center; margin: 2rem 0; background-color: var(--bg-secondary);">
+                <h3>Download Mintas v1.0.0</h3>
+                <p>Windows, macOS, and Linux</p>
+                <a href="https://github.com/NotBeastR/mintas-scr" class="btn" style="
+                    display: inline-block;
+                    background-color: var(--primary-color);
+                    color: white;
+                    padding: 0.75rem 1.5rem;
+                    border-radius: 0.375rem;
+                    font-weight: 600;
+                    margin-top: 1rem;
+                    text-decoration: none;
+                ">Download Installer</a>
+            </div>
+
+            <h2>Verify Installation</h2>
+            <p>Once installed, open your terminal (Command Prompt or PowerShell on Windows) and type:</p>
+            <pre><code>mintas --version</code></pre>
+            <p>You should see something like:</p>
+            <pre><code>Mintas v1.0.0</code></pre>
+
+            <h2>Troubleshooting</h2>
+            <p>If the command is not found, ensure that the Mintas bin directory is added to your system's
+                <strong>PATH</strong> environment variable.
+            </p>
+        </main>
+    </div>
+    <script src="../js/main.js"></script>
+</body>
+
+</html>

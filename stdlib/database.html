@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Database Modules - Mintas</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <div class="layout">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="brand">
+                <span>Mintas</span>
+            </div>
+
+            <div class="nav">
+                <a href="../index.html">Overview</a>
+
+                <div class="nav-header">Standard Library</div>
+                <a href="index.html">All Modules</a>
+                <a href="math.html">Math</a>
+                <a href="files.html">SysFiles</a>
+                <a href="datetime.html">DateTime</a>
+                <a href="json.html">JSON</a>
+                <a href="database.html" class="active">Database</a>
+                <a href="canvas.html">Canvas</a>
+                <a href="dew.html">Dew</a>
+                <a href="networking.html">Networking</a>
+                <a href="security.html">Security</a>
+                <a href="system.html">System</a>
+                <a href="formats.html">Data Formats</a>
+                <a href="protocols.html">Protocols</a>
+                <a href="utilities.html">Utilities</a>
+                <a href="ai.html">AI</a>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <h1>Database Modules</h1>
+            <p>Mintas provides multiple ways to interact with databases. You can use the high-level
+                <code>dew.query</code> for SQL databases (recommended for web apps) or specific modules for low-level
+                control.
+            </p>
+
+            <h2>Universal Query (via Dew)</h2>
+            <p>Access SQLite, Postgres, or MySQL using a unified API.</p>
+            <pre><code>include dew</code></pre>
+
+            <table class="methods-table">
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>dew.database(str)</code></td>
+                        <td>Parses a connection string into a config object.</td>
+                        <td><code>let db = dew.database("sqlite:///app.db")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>dew.query(db, sql, params)</code></td>
+                        <td>Executes raw SQL. Returns an array of tables.</td>
+                        <td><code>let rows = dew.query(db, "SELECT * FROM x WHERE id = ?", [1])</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>dew.redis_get(url, key)</code></td>
+                        <td>Quickly fetch a string from Redis.</td>
+                        <td><code>let val = dew.redis_get("redis://localhost/", "key")</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>SQLite3 Module</h2>
+            <p>A dedicated module for SQLite operations.</p>
+            <pre><code>include sqlite3</code></pre>
+            <table class="methods-table">
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>connect(path)</code></td>
+                        <td>Opens a connection to an SQLite file.</td>
+                        <td><code>let conn = sqlite3.connect("data.db")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>create_table(name, cols)</code></td>
+                        <td>Creates a table with specified columns.</td>
+                        <td><code>sqlite3.create_table("users", {id: "INTEGER", name: "TEXT"})</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>insert(table, data)</code></td>
+                        <td>Inserts a row into a table.</td>
+                        <td><code>sqlite3.insert("users", {name: "Bob", age: 30})</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>select(table)</code></td>
+                        <td>Selects all rows from a table.</td>
+                        <td><code>let users = sqlite3.select("users")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>delete(table, where)</code></td>
+                        <td>Deletes rows matching conditions.</td>
+                        <td><code>sqlite3.delete("users", {name: "Bob"})</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Redis Module</h2>
+            <p>A dedicated module for Redis operations including Lists and Hashes.</p>
+            <pre><code>include redis2</code></pre>
+            <table class="methods-table">
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>connect(host)</code></td>
+                        <td>Connects to a Redis server. Default: "localhost:6379".</td>
+                        <td><code>redis2.connect()</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>set(key, value)</code></td>
+                        <td>Sets a string key.</td>
+                        <td><code>redis2.set("session", "active")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>get(key)</code></td>
+                        <td>Gets a string key.</td>
+                        <td><code>let val = redis2.get("session")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>push(list, value)</code></td>
+                        <td>Pushes a value to a list (LPUSH).</td>
+                        <td><code>redis2.push("queue", "job1")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>pop(list)</code></td>
+                        <td>Pops a value from a list (LPOP).</td>
+                        <td><code>let job = redis2.pop("queue")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>hash_set(key, field, val)</code></td>
+                        <td>Sets a field in a hash.</td>
+                        <td><code>redis2.hash_set("user:1", "name", "Bob")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>hash_get_all(key)</code></td>
+                        <td>Gets all fields from a hash.</td>
+                        <td><code>let user = redis2.hash_get_all("user:1")</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </main>
+    </div>
+    <script src="../js/main.js"></script>
+</body>
+
+</html>

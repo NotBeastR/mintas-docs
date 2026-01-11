@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Functions - Mintas</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css">
+</head>
+
+<body>
+    <div class="layout">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="brand">
+                <span>Mintas</span>
+            </div>
+
+            <div class="nav">
+                <a href="../index.html">Overview</a>
+
+                <div class="nav-header">Getting Started</div>
+                <a href="../guides/install.html">Installation</a>
+                <a href="../guides/quickstart.html">Quick Start</a>
+
+                <div class="nav-header">Language</div>
+                <a href="syntax.html">Syntax & Types</a>
+                <a href="variables.html">Variables & Constants</a>
+                <a href="collections.html">Arrays & Tables</a>
+                <a href="control-flow.html">Control Flow</a>
+                <a href="functions.html" class="active">Functions</a>
+                <a href="classes.html">Classes & OOP</a>
+
+                <div class="nav-header">Web Development</div>
+                <a href="dew.html">Dew Framework</a>
+                <a href="dew-ui.html">Interactive UI</a>
+
+                <div class="nav-header">Standard Library</div>
+                <a href="../stdlib/index.html">All Modules</a>
+                <a href="../stdlib/math.html">Math</a>
+                <a href="../stdlib/datetime.html">DateTime</a>
+                <a href="../stdlib/json.html">JSON</a>
+                <a href="../stdlib/files.html">SysFiles</a>
+                <a href="../stdlib/system.html">System</a>
+                <a href="../stdlib/networking.html">Networking</a>
+                <a href="../stdlib/database.html">Database</a>
+                <a href="../stdlib/dew.html">Dew Web</a>
+                <a href="../stdlib/canvas.html">Canvas</a>
+                <a href="../stdlib/security.html">Security</a>
+                <a href="../stdlib/formats.html">Data Formats</a>
+                <a href="../stdlib/protocols.html">Protocols</a>
+                <a href="../stdlib/utilities.html">Utilities</a>
+                <a href="../stdlib/ai.html">AI</a>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <h1>Functions</h1>
+            <p>Functions are reusable blocks of code. Mintas supports multiple keywords for defining functions to suit
+                your coding style.</p>
+
+            <h2>Defining Functions</h2>
+            <p>You can use <code>func</code>, <code>def</code>, or <code>make</code> to define a function. All are
+                semantically identical.</p>
+
+            <pre><code class="language-mintas"># Standard Syntax
+func greet(name):
+    say("Hello, " + name)
+end
+
+# Python-style Alias
+def add(a, b):
+    return a + b
+end
+
+# 'make' Alias
+make setup_server(port):
+    say("Server starting on " + port)
+end</code></pre>
+
+            <h2>Return Values</h2>
+            <p>Use the <code>return</code> keyword to return a value. If no return statement is reached, the function
+                returns <code>empty</code>.</p>
+            <pre><code class="language-mintas">func calculate_area(width, height):
+    return width * height
+end
+
+let area = calculate_area(10, 5)
+say(area) # Prints 50</code></pre>
+
+            <h2>First-Class Citizens</h2>
+            <p>Functions in Mintas are first-class values. They can be assigned to variables, passed as arguments, or
+                returned from other functions.</p>
+
+            <pre><code class="language-mintas">let my_func = func(x):
+    return x * 2
+end
+
+say(my_func(10)) # Prints 20</code></pre>
+        </main>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+</body>
+
+</html>

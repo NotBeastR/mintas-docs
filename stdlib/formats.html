@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Formats - Mintas</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <div class="layout">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="brand">
+                <span>Mintas</span>
+            </div>
+
+            <div class="nav">
+                <a href="../index.html">Overview</a>
+                <div class="nav-header">Standard Library</div>
+                <a href="index.html">All Modules</a>
+                <a href="math.html">Math</a>
+                <a href="files.html">SysFiles</a>
+                <a href="datetime.html">DateTime</a>
+                <a href="json.html">JSON</a>
+                <a href="database.html">Database</a>
+                <a href="canvas.html">Canvas</a>
+                <a href="dew.html">Dew</a>
+                <a href="networking.html">Networking</a>
+                <a href="security.html">Security</a>
+                <a href="system.html">System</a>
+                <a href="formats.html" class="active">Data Formats</a>
+                <a href="protocols.html">Protocols</a>
+                <a href="utilities.html">Utilities</a>
+                <a href="ai.html">AI</a>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <h1>Data Formats</h1>
+            <p>Modules for parsing, generating, and manipulating various data formats like CSV, YAML, PDF, and QR codes.
+            </p>
+
+            <h2>CSV Module</h2>
+            <p>Read and write Comma Separated Values.</p>
+            <pre><code>include csv</code></pre>
+            <table class="methods-table">
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>read(path, [has_header])</code></td>
+                        <td>Reads a CSV file into an array of tables or arrays.</td>
+                        <td><code>let data = csv.read("users.csv")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>parse(content, [has_header])</code></td>
+                        <td>Parses a CSV string.</td>
+                        <td><code>csv.parse("name,age\nAlice,30")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>write(path, data)</code></td>
+                        <td>Writes an array of tables/arrays to a CSV file.</td>
+                        <td><code>csv.write("out.csv", data)</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>YAML Module</h2>
+            <p>Parsing and generating YAML data structures.</p>
+            <pre><code>include myyaml as yaml</code></pre>
+            <table class="methods-table">
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>parse(str)</code></td>
+                        <td>Parses a YAML string into a Mintas table.</td>
+                        <td><code>let cfg = yaml.parse(content)</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>stringify(val)</code></td>
+                        <td>Converts a table/array to a YAML string.</td>
+                        <td><code>yaml.stringify({name: "App"})</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>PDF Module</h2>
+            <p>Generate PDF documents programmatically.</p>
+            <pre><code>include mypdf as pdf</code></pre>
+            <table class="methods-table">
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>create(title)</code></td>
+                        <td>Creates a new PDF document object.</td>
+                        <td><code>let doc = pdf.create("Invoice")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>add_page(doc)</code></td>
+                        <td>Adds a new page to the document.</td>
+                        <td><code>doc = pdf.add_page(doc)</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>add_text(doc, text, x, y)</code></td>
+                        <td>Adds text at specific coordinates.</td>
+                        <td><code>doc = pdf.add_text(doc, "Hello", 50, 700)</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>save(doc, path)</code></td>
+                        <td>Saves the PDF to a file.</td>
+                        <td><code>pdf.save(doc, "output.pdf")</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>QR Code Module</h2>
+            <p>Generate QR codes in various formats.</p>
+            <pre><code>include myqr as qr</code></pre>
+            <table class="methods-table">
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>to_ascii(data)</code></td>
+                        <td>Generates a QR code as an ASCII string.</td>
+                        <td><code>print(qr.to_ascii("https://mintas.dev"))</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>to_svg(data)</code></td>
+                        <td>Generates an SVG string of the QR code.</td>
+                        <td><code>let svg = qr.to_svg("data")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>to_html(data)</code></td>
+                        <td>Generates an HTML representation.</td>
+                        <td><code>res.body = qr.to_html("data")</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Archive & Compression</h2>
+            <p>Work with TAR archives and compression algorithms.</p>
+            <pre><code>include archive
+include compress</code></pre>
+            <table class="methods-table">
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>archive.create(name)</code></td>
+                        <td>Creates a new archive object.</td>
+                        <td><code>let a = archive.create("logs.tar")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>compress.gzip(data)</code></td>
+                        <td>Compresses data using GZIP.</td>
+                        <td><code>let c = compress.gzip(content)</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>compress.gunzip(data)</code></td>
+                        <td>Decompresses GZIP data.</td>
+                        <td><code>compress.gunzip(c)</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Slug Module</h2>
+            <p>URL-friendly string generators.</p>
+            <pre><code>include slug</code></pre>
+            <table class="methods-table">
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>make(str)</code></td>
+                        <td>Creates a slug from a string.</td>
+                        <td><code>slug.make("Hello World!") # hello-world</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </main>
+    </div>
+    <script src="../js/main.js"></script>
+</body>
+
+</html>

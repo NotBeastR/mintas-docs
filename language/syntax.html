@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Syntax & Types - Mintas</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css">
+</head>
+
+<body>
+    <div class="layout">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="brand">
+                <span>Mintas</span>
+            </div>
+
+            <div class="nav">
+                <a href="../index.html">Overview</a>
+
+                <div class="nav-header">Getting Started</div>
+                <a href="../guides/install.html">Installation</a>
+                <a href="../guides/quickstart.html">Quick Start</a>
+
+                <div class="nav-header">Language</div>
+                <a href="syntax.html" class="active">Syntax & Types</a>
+                <a href="variables.html">Variables & Constants</a>
+                <a href="collections.html">Arrays & Tables</a>
+                <a href="control-flow.html">Control Flow</a>
+                <a href="functions.html">Functions</a>
+                <a href="classes.html">Classes & OOP</a>
+
+                <div class="nav-header">Web Development</div>
+                <a href="dew.html">Dew Framework</a>
+                <a href="dew-ui.html">Interactive UI</a>
+
+                <div class="nav-header">Standard Library</div>
+                <a href="../stdlib/index.html">All Modules</a>
+                <a href="../stdlib/math.html">Math</a>
+                <a href="../stdlib/datetime.html">DateTime</a>
+                <a href="../stdlib/json.html">JSON</a>
+                <a href="../stdlib/files.html">SysFiles</a>
+                <a href="../stdlib/system.html">System</a>
+                <a href="../stdlib/networking.html">Networking</a>
+                <a href="../stdlib/database.html">Database</a>
+                <a href="../stdlib/dew.html">Dew Web</a>
+                <a href="../stdlib/canvas.html">Canvas</a>
+                <a href="../stdlib/security.html">Security</a>
+                <a href="../stdlib/formats.html">Data Formats</a>
+                <a href="../stdlib/protocols.html">Protocols</a>
+                <a href="../stdlib/utilities.html">Utilities</a>
+                <a href="../stdlib/ai.html">AI</a>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <h1>Syntax, Types & Operators</h1>
+            <p>Mintas is designed for readability and expressiveness. It supports traditional C-style symbols as well as English-like aliases for a natural coding experience.</p>
+
+            <h2>Variables & Constants</h2>
+            <p>Variables can be declared using <code>let</code> or its alias <code>so</code>. Constants are declared using <code>const</code> or <code>consta</code>.</p>
+            <pre><code class="language-mintas">let name = "Mintas"   # Standard declaration
+so count = 10         # Alias for 'let'
+const PI = 3.14       # immutable constant
+consta MAX = 100      # Alias for 'const'</code></pre>
+
+            <h3>English Assignment</h3>
+            <p>You can use the keyword <code>is</code> as an alias for the assignment operator <code>=</code>.</p>
+            <pre><code class="language-mintas">let age is 25
+so active is true</code></pre>
+
+            <h2>Data Types</h2>
+            <p>Mintas is dynamically typed with a rich set of primitives.</p>
+
+            <table class="api-table">
+                <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                    <th>Examples</th>
+                </tr>
+                <tr>
+                    <td><strong>Number</strong></td>
+                    <td>64-bit floating point numbers.</td>
+                    <td><code>10</code>, <code>-5.5</code>, <code>3.14</code></td>
+                </tr>
+                <tr>
+                    <td><strong>String</strong></td>
+                    <td>UTF-8 text sequences. Supports escapes like <code>\n</code>, <code>\t</code>.</td>
+                    <td><code>"Hello"</code>, <code>"Line 1\nLine 2"</code></td>
+                </tr>
+                <tr>
+                    <td><strong>Boolean</strong></td>
+                    <td>Logical true or false.</td>
+                    <td><code>true</code>, <code>false</code></td>
+                </tr>
+                <tr>
+                    <td><strong>Maybe</strong></td>
+                    <td>Represents a value that might be present (similar to Option/Result types).</td>
+                    <td><code>maybe</code></td>
+                </tr>
+                <tr>
+                    <td><strong>Empty</strong></td>
+                    <td>Represents the absence of a value (null/nil).</td>
+                    <td><code>empty</code></td>
+                </tr>
+            </table>
+
+            <h2>Collections</h2>
+            <h3>Arrays (Lists)</h3>
+            <p>Arrays are ordered collections defined with square brackets <code>[]</code>. </p>
+            <pre><code class="language-mintas">let list = [1, 2, 3, "four"]
+println(list[0])  # Access elements (0-indexed)</code></pre>
+
+            <h3>Tables (Dictionaries)</h3>
+            <p>Tables are key-value pairs defined with curly braces <code>{}</code>.</p>
+            <pre><code class="language-mintas">let user = {
+    "name": "Alice",
+    "age": 30
+}
+println(user["name"])</code></pre>
+
+            <h2>Operators & Aliases</h2>
+            <p>Mintas provides English aliases for almost all operators to support "literate programming" styles.</p>
+
+            <h3>Arithmetic</h3>
+            <table class="api-table">
+                <tr>
+                    <th>Symbol</th>
+                    <th>Alias</th>
+                    <th>Operation</th>
+                </tr>
+                <tr><td><code>+</code></td><td>-</td><td>Addition</td></tr>
+                <tr><td><code>-</code></td><td>-</td><td>Subtraction</td></tr>
+                <tr><td><code>*</code></td><td>-</td><td>Multiplication</td></tr>
+                <tr><td><code>/</code></td><td>-</td><td>Division</td></tr>
+                <tr><td><code>**</code></td><td>-</td><td>Exponentiation</td></tr>
+                <tr><td><code>%</code></td><td>-</td><td>Modulo</td></tr>
+                <tr><td><code>++</code></td><td>-</td><td>Increment</td></tr>
+                <tr><td><code>--</code></td><td>-</td><td>Decrement</td></tr>
+            </table>
+
+            <h3>Comparison</h3>
+            <table class="api-table">
+                <tr>
+                    <th>Symbol</th>
+                    <th>Alias</th>
+                    <th>Meaning</th>
+                </tr>
+                <tr>
+                    <td><code>==</code></td>
+                    <td><code>equal</code></td>
+                    <td>Equality</td>
+                </tr>
+                <tr>
+                    <td><code>!=</code></td>
+                    <td><code>no</code></td>
+                    <td>Inequality</td>
+                </tr>
+                <tr>
+                    <td><code>===</code></td>
+                    <td><code>sure</code></td>
+                    <td>Strict Equality</td>
+                </tr>
+                <tr>
+                    <td><code>!==</code></td>
+                    <td><code>nah</code></td>
+                    <td>Strict Inequality</td>
+                </tr>
+                <tr>
+                    <td><code>&gt;</code></td>
+                    <td><code>great</code></td>
+                    <td>Greater Than</td>
+                </tr>
+                <tr>
+                    <td><code>&lt;</code></td>
+                    <td><code>less</code></td>
+                    <td>Less Than</td>
+                </tr>
+                <tr>
+                    <td><code>&gt;=</code></td>
+                    <td><code>gore</code></td>
+                    <td>Greater OR Equal</td>
+                </tr>
+                <tr>
+                    <td><code>&lt;=</code></td>
+                    <td><code>lore</code></td>
+                    <td>Less OR Equal</td>
+                </tr>
+            </table>
+
+            <h3>Logical</h3>
+            <table class="api-table">
+                <tr>
+                    <th>Symbol</th>
+                    <th>Alias</th>
+                    <th>Meaning</th>
+                </tr>
+                <tr>
+                    <td><code>&&</code></td>
+                    <td><code>and</code></td>
+                    <td>Logical AND</td>
+                </tr>
+                <tr>
+                    <td><code>||</code></td>
+                    <td><code>or</code></td>
+                    <td>Logical OR</td>
+                </tr>
+                <tr>
+                    <td><code>!</code></td>
+                    <td><code>not</code></td>
+                    <td>Logical NOT</td>
+                </tr>
+            </table>
+
+            <h2>Special Features</h2>
+            <h3>SuperSet (spr)</h3>
+            <p>The <code>spr</code> keyword wraps an expression in a SuperSet container.</p>
+            <pre><code class="language-mintas">let s = spr { 10 + 20 }</code></pre>
+
+            <h3>Conditions (cond & follow)</h3>
+            <p>Store conditions for later evaluation.</p>
+            <pre><code class="language-mintas">let check = cond(age > 18)
+if follow(check):
+    say("Adult")
+end</code></pre>
+        </main>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+</body>
+</html>

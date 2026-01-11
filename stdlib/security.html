@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Modules - Mintas</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <div class="layout">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="brand">
+                <span>Mintas</span>
+            </div>
+
+            <div class="nav">
+                <a href="../index.html">Overview</a>
+                <div class="nav-header">Standard Library</div>
+                <a href="index.html">All Modules</a>
+                <a href="math.html">Math</a>
+                <a href="files.html">SysFiles</a>
+                <a href="datetime.html">DateTime</a>
+                <a href="json.html">JSON</a>
+                <a href="database.html">Database</a>
+                <a href="canvas.html">Canvas</a>
+                <a href="dew.html">Dew</a>
+                <a href="networking.html">Networking</a>
+                <a href="security.html" class="active">Security</a>
+                <a href="system.html">System</a>
+                <a href="formats.html">Data Formats</a>
+                <a href="protocols.html">Protocols</a>
+                <a href="utilities.html">Utilities</a>
+                <a href="ai.html">AI</a>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <h1>Security & Cryptography</h1>
+            <p>Modules for hashing, encryption, secure connections, and encoding.</p>
+
+            <h2>Crypto Module</h2>
+            <pre><code>include crypto</code></pre>
+            <table class="methods-table">
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>encrypt(data, key)</code></td>
+                        <td>Encrypts string using a simple XOR cipher.</td>
+                        <td><code>let enc = crypto.encrypt("secret", "key")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>decrypt(data, key)</code></td>
+                        <td>Decrypts XOR-encrypted string.</td>
+                        <td><code>let dec = crypto.decrypt(enc, "key")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>hash(data, algo)</code></td>
+                        <td>Hashes data. Algo: "md5", "sha1", "sha256".</td>
+                        <td><code>crypto.hash("foo", "sha256")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>hmac(data, key)</code></td>
+                        <td>Computes HMAC-SHA256.</td>
+                        <td><code>crypto.hmac("data", "secret")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>random_bytes(n)</code></td>
+                        <td>Returns array of n random bytes.</td>
+                        <td><code>crypto.random_bytes(16)</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>random_hex(n)</code></td>
+                        <td>Returns random hex string of length n/2 bytes.</td>
+                        <td><code>crypto.random_hex(32)</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Hash Module</h2>
+            <p>Dedicated hashing algorithms.</p>
+            <pre><code>include hash</code></pre>
+            <table class="methods-table">
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>sha256(str)</code></td>
+                        <td>Returns SHA-256 hash.</td>
+                        <td><code>hash.sha256("hello")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>sha512(str)</code></td>
+                        <td>Returns SHA-512 hash.</td>
+                        <td><code>hash.sha512("hello")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>md5(str)</code></td>
+                        <td>Returns MD5 hash.</td>
+                        <td><code>hash.md5("hello")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>crc32(str)</code></td>
+                        <td>Returns CRC32 checksum.</td>
+                        <td><code>hash.crc32("hello")</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>UUID Module</h2>
+            <pre><code>include uuid</code></pre>
+            <table class="methods-table">
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>v4()</code></td>
+                        <td>Generates a random UUID (v4).</td>
+                        <td><code>uuid.v4()</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>v1()</code></td>
+                        <td>Generates a time-based UUID (v1).</td>
+                        <td><code>uuid.v1()</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>is_valid(str)</code></td>
+                        <td>Checks if string is a valid UUID.</td>
+                        <td><code>uuid.is_valid(id)</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Base64 Module</h2>
+            <pre><code>include base64</code></pre>
+            <table class="methods-table">
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>encode(str)</code></td>
+                        <td>Encodes string to Base64.</td>
+                        <td><code>base64.encode("hello")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>decode(str)</code></td>
+                        <td>Decodes Base64 string.</td>
+                        <td><code>base64.decode("AGVsbG8=")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>urlsafe_encode(str)</code></td>
+                        <td>URL-safe Base64 encoding.</td>
+                        <td><code>base64.urlsafe_encode("hello")</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>SSH Module</h2>
+            <pre><code>include ssh</code></pre>
+            <table class="methods-table">
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>connect(config)</code></td>
+                        <td>Connects to SSH server. Config: <code>{host, user, pass, key}</code>.</td>
+                        <td><code>let conn = ssh.connect({host: "10.0.0.1", user: "root"})</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>exec(conn, cmd)</code></td>
+                        <td>Executes command on remote server. Returns table with stdout/stderr.</td>
+                        <td><code>ssh.exec(conn, "ls -la")</code></td>
+                    </tr>
+                </tbody>
+            </table>
+            <h2>Cert Module</h2>
+            <pre><code>include cert</code></pre>
+            <table class="methods-table">
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>generate(cn, days)</code></td>
+                        <td>Generates a self-signed certificate (mock).</td>
+                        <td><code>cert.generate("localhost", 365)</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </main>
+    </div>
+    <script src="../js/main.js"></script>
+</body>
+
+</html>

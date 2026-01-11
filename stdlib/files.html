@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SysFiles (I/O) - Mintas</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <div class="layout">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="brand">
+                <span>Mintas</span>
+            </div>
+
+            <div class="nav">
+                <a href="../index.html">Overview</a>
+
+                <div class="nav-header">Standard Library</div>
+                <a href="index.html">All Modules</a>
+                <a href="math.html">Math</a>
+                <a href="files.html" class="active">SysFiles</a>
+                <a href="datetime.html">DateTime</a>
+                <a href="json.html">JSON</a>
+                <a href="database.html">Database</a>
+                <a href="canvas.html">Canvas</a>
+                <a href="dew.html">Dew</a>
+                <a href="networking.html">Networking</a>
+                <a href="security.html">Security</a>
+                <a href="system.html">System</a>
+                <a href="formats.html">Data Formats</a>
+                <a href="protocols.html">Protocols</a>
+                <a href="utilities.html">Utilities</a>
+                <a href="ai.html">AI</a>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <h1>SysFiles (I/O)</h1>
+            <p>The <code>sysfiles</code> module (also aliased as <code>fs</code>) provides comprehensive tools for file
+                system interaction, including reading, writing, and directory management.</p>
+
+            <h2>Importing</h2>
+            <pre><code>include sysfiles
+# Or use the short alias
+include sysfiles as fs</code></pre>
+
+            <h2>File Operations</h2>
+
+            <h3>Reading and Writing</h3>
+            <pre><code># Read entire file as string
+let content = fs.read("data.txt")
+say(content)
+
+# Write string to file (overwrites existing)
+fs.write("output.txt", "Hello Mintas!")
+
+# Append string to end of file
+fs.append("log.txt", "New log entry\n")</code></pre>
+
+            <h3>Management</h3>
+            <pre><code># Check if file or directory exists
+if (fs.exists("config.json")):
+    say("Config found")
+end
+
+# Copy file
+fs.copy("source.txt", "backup.txt")
+
+# Move or Rename file
+fs.move("old_name.txt", "new_name.txt")
+
+# Delete file or directory
+fs.delete("temp_file.txt")
+
+# Create an empty file
+fs.touch("new_file.txt")</code></pre>
+
+            <h2>Directory Operations</h2>
+            <pre><code># Create directory (and parents if needed)
+fs.mkdir("path/to/project")
+
+# List files in directory
+let files = fs.list("./docs")
+for (file in files):
+    say("Found: " + file)
+end
+
+# Remove directory
+fs.rmdir("old_folder")
+
+# Copy entire directory recursively
+fs.copydir("./source", "./dest")</code></pre>
+
+            <h2>Metadata & Info</h2>
+            <pre><code># Get file size in bytes
+let bytes = fs.size("video.mp4")
+
+# Get detailed information
+let info = fs.info("photo.jpg")
+say("Size: " + $info.size)
+say("Is File: " + $info.is_file)
+say("Is Dir: " + $info.is_dir)
+say("Read Only: " + $info.readonly)</code></pre>
+
+            <h2>Search (Glob)</h2>
+            <p>Find files matching a specific pattern or extension.</p>
+            <pre><code># List all .as files in current directory
+let scripts = fs.glob("*.as")
+for (script in scripts):
+    say("Script: " + script)
+end</code></pre>
+
+        </main>
+    </div>
+    <script src="../js/main.js"></script>
+</body>
+
+</html>

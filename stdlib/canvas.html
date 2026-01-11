@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas Module - Mintas</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <div class="layout">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="brand">
+                <span>Mintas</span>
+            </div>
+
+            <div class="nav">
+                <a href="../index.html">Overview</a>
+
+                <div class="nav-header">Standard Library</div>
+                <a href="index.html">All Modules</a>
+                <a href="math.html">Math</a>
+                <a href="files.html">SysFiles</a>
+                <a href="datetime.html">DateTime</a>
+                <a href="json.html">JSON</a>
+                <a href="database.html">Database</a>
+                <a href="canvas.html" class="active">Canvas</a>
+                <a href="dew.html">Dew</a>
+                <a href="networking.html">Networking</a>
+                <a href="security.html">Security</a>
+                <a href="system.html">System</a>
+                <a href="formats.html">Data Formats</a>
+                <a href="protocols.html">Protocols</a>
+                <a href="utilities.html">Utilities</a>
+                <a href="ai.html">AI</a>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <h1>Canvas Module</h1>
+            <p>The <code>canvas</code> module is the Ultimate 2D Game Framework for Mintas. It provides an easy-to-use
+                interface for creating games with sprites, physics, collision detection, and audio.</p>
+
+            <h2>Importing</h2>
+            <pre><code>include canvas</code></pre>
+
+            <h2>Window Management</h2>
+            <table class="methods-table">
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>create(title, width, height)</code></td>
+                        <td>Opens a new game window.</td>
+                        <td><code>canvas.create("My Game", 800, 600)</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>update()</code></td>
+                        <td>Updates the window and inputs. Call this in your game loop. Returns false if window is
+                            closed.</td>
+                        <td><code>while canvas.update() { ... }</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>clear(color)</code></td>
+                        <td>Clears the screen with a hex color.</td>
+                        <td><code>canvas.clear("#000000")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>quit()</code></td>
+                        <td>Closes the game window.</td>
+                        <td><code>canvas.quit()</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Drawing Primitives</h2>
+            <table class="methods-table">
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>rect(x, y, w, h, color)</code></td>
+                        <td>Draws a rectangle outline.</td>
+                        <td><code>canvas.rect(10, 10, 50, 50, "#FF0000")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>fill_rect(x, y, w, h, color)</code></td>
+                        <td>Draws a filled rectangle.</td>
+                        <td><code>canvas.fill_rect(10, 10, 50, 50, "#00FF00")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>circle(cx, cy, r, color)</code></td>
+                        <td>Draws a circle outline.</td>
+                        <td><code>canvas.circle(100, 100, 30, "#0000FF")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>fill_circle(cx, cy, r, color)</code></td>
+                        <td>Draws a filled circle.</td>
+                        <td><code>canvas.fill_circle(100, 100, 30, "#FFFF00")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>line(x1, y1, x2, y2, color)</code></td>
+                        <td>Draws a line between two points.</td>
+                        <td><code>canvas.line(0, 0, 800, 600, "#FFFFFF")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>text(str, x, y, color, scale)</code></td>
+                        <td>Draws text on screen. Scale defaults to 2.</td>
+                        <td><code>canvas.text("Score: 100", 10, 10, "#FFFFFF", 2)</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Sprite System</h2>
+            <p>Sprites are the core objects in Canvas. They handle position, velocity, physics, and rendering
+                automatically.</p>
+            <table class="methods-table">
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>sprite(id, x, y, w, h, color)</code></td>
+                        <td>Creates a new sprite.</td>
+                        <td><code>canvas.sprite("player", 100, 100, 32, 32, "#00FF00")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>set(id, prop, value)</code></td>
+                        <td>Sets a property of a sprite (x, y, vx, vy, gravity, etc.).</td>
+                        <td><code>canvas.set("player", "gravity", 0.5)</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>get(id, prop)</code></td>
+                        <td>Gets a property of a sprite.</td>
+                        <td><code>let x = canvas.get("player", "x")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>draw_all()</code></td>
+                        <td>Draws all visible sprites.</td>
+                        <td><code>canvas.draw_all()</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>set_texture(id, tex_name)</code></td>
+                        <td>Assigns a loaded image texture to a sprite.</td>
+                        <td><code>canvas.set_texture("player", "hero_idle")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>set_frame(id, x, y, w, h)</code></td>
+                        <td>Sets the animation frame (sub-rectangle) of the texture.</td>
+                        <td><code>canvas.set_frame("player", 0, 0, 32, 32)</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Assets & Audio</h2>
+            <table class="methods-table">
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>load_image(name, path)</code></td>
+                        <td>Loads an image file for use as a texture.</td>
+                        <td><code>canvas.load_image("hero", "assets/hero.png")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>play_sound(path)</code></td>
+                        <td>Plays a sound file (WAV/MP3/OGG). Fire and forget.</td>
+                        <td><code>canvas.play_sound("assets/jump.wav")</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Input</h2>
+            <table class="methods-table">
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>key(name)</code></td>
+                        <td>Returns true if key is currently held down. (left, right, up, down, space, a-z...)</td>
+                        <td><code>if canvas.key("right") { ... }</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>key_pressed(name)</code></td>
+                        <td>Returns true if key was pressed this frame (one-shot).</td>
+                        <td><code>if canvas.key_pressed("space") { ... }</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>mouse_down(button)</code></td>
+                        <td>Returns true if mouse button is held (0=left, 1=right).</td>
+                        <td><code>if canvas.mouse_down(0) { ... }</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </main>
+    </div>
+    <script src="../js/main.js"></script>
+</body>
+
+</html>

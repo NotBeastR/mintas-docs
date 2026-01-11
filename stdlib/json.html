@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Module - Mintas</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <div class="layout">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="brand">
+                <span>Mintas</span>
+            </div>
+
+            <div class="nav">
+                <a href="../index.html">Overview</a>
+
+                <div class="nav-header">Standard Library</div>
+                <a href="index.html">All Modules</a>
+                <a href="math.html">Math</a>
+                <a href="files.html">SysFiles</a>
+                <a href="datetime.html">DateTime</a>
+                <a href="json.html" class="active">JSON</a>
+                <a href="database.html">Database</a>
+                <a href="canvas.html">Canvas</a>
+                <a href="dew.html">Dew</a>
+                <a href="networking.html">Networking</a>
+                <a href="security.html">Security</a>
+                <a href="system.html">System</a>
+                <a href="formats.html">Data Formats</a>
+                <a href="protocols.html">Protocols</a>
+                <a href="utilities.html">Utilities</a>
+                <a href="ai.html">AI</a>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <h1>JSON Module</h1>
+            <p>The <code>json</code> module provides powerful parsing and serialization for JSON data.</p>
+
+            <h2>Importing</h2>
+            <pre><code>include json</code></pre>
+
+            <h2>Encoding & Decoding</h2>
+            <table class="methods-table">
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>encode(val)</code></td>
+                        <td>Converts a Mintas value to a JSON string.</td>
+                        <td><code>json.encode({a: 1})</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>decode(str)</code></td>
+                        <td>Parses a JSON string into a Mintas value.</td>
+                        <td><code>let data = json.decode("{\"a\": 1}")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>pretty(val)</code></td>
+                        <td>Converts a value to a formatted JSON string.</td>
+                        <td><code>print(json.pretty(data))</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>is_valid(str)</code></td>
+                        <td>Returns true if the string is valid JSON.</td>
+                        <td><code>if json.is_valid(input) { ... }</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Manipulation</h2>
+            <p>Work with JSON strings directly without full decoding.</p>
+            <table class="methods-table">
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>get(str, path)</code></td>
+                        <td>extracts a value using dot-notation.</td>
+                        <td><code>json.get(json_str, "users.0.name")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>set(str, key, val)</code></td>
+                        <td>Sets a value in the JSON string.</td>
+                        <td><code>let new_json = json.set(old_json, "status", "active")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>keys(str)</code></td>
+                        <td>Returns keys if the root is an object.</td>
+                        <td><code>let keys = json.keys(json_str)</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Aliases</h2>
+            <ul>
+                <li><code>stringify</code> -> <code>encode</code></li>
+                <li><code>parse</code> -> <code>decode</code></li>
+            </ul>
+
+        </main>
+    </div>
+    <script src="../js/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Modules - Mintas</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <div class="layout">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="brand">
+                <span>Mintas</span>
+            </div>
+
+            <div class="nav">
+                <a href="../index.html">Overview</a>
+                <div class="nav-header">Standard Library</div>
+                <a href="index.html">All Modules</a>
+                <a href="math.html">Math</a>
+                <a href="files.html">SysFiles</a>
+                <a href="datetime.html">DateTime</a>
+                <a href="json.html">JSON</a>
+                <a href="database.html">Database</a>
+                <a href="canvas.html">Canvas</a>
+                <a href="dew.html">Dew</a>
+                <a href="networking.html">Networking</a>
+                <a href="security.html">Security</a>
+                <a href="system.html" class="active">System</a>
+                <a href="formats.html">Data Formats</a>
+                <a href="protocols.html">Protocols</a>
+                <a href="utilities.html">Utilities</a>
+                <a href="ai.html">AI</a>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <h1>System & OS</h1>
+            <p>Modules for interacting with the operating system, file paths, and external processes.</p>
+
+            <h2>OS Module</h2>
+            <pre><code>include os</code></pre>
+            <table class="methods-table">
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>platform()</code></td>
+                        <td>Returns OS name (e.g., "linux", "windows").</td>
+                        <td><code>os.platform()</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>cwd()</code></td>
+                        <td>Returns current working directory.</td>
+                        <td><code>os.cwd()</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>chdir(path)</code></td>
+                        <td>Changes current working directory.</td>
+                        <td><code>os.chdir("/tmp")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>exit(code)</code></td>
+                        <td>Exits the process with the given code.</td>
+                        <td><code>os.exit(1)</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>homedir()</code></td>
+                        <td>Returns user's home directory.</td>
+                        <td><code>os.homedir()</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Env Module</h2>
+            <pre><code>include env</code></pre>
+            <table class="methods-table">
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>get(key, [def])</code></td>
+                        <td>Gets env var, optionally with default.</td>
+                        <td><code>env.get("PATH")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>set(key, val)</code></td>
+                        <td>Sets environment variable.</td>
+                        <td><code>env.set("FOO", "bar")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>load(path)</code></td>
+                        <td>Loads variables from a .env file.</td>
+                        <td><code>env.load(".env")</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Path Module</h2>
+            <pre><code>include path</code></pre>
+            <table class="methods-table">
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>join(...)</code></td>
+                        <td>Joins path segments intelligently.</td>
+                        <td><code>path.join("a", "b", "c")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>basename(p)</code></td>
+                        <td>Returns the file name portion.</td>
+                        <td><code>path.basename("/a/b.txt")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>extname(p)</code></td>
+                        <td>Returns the extension.</td>
+                        <td><code>path.extname("file.txt")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>exists(p)</code></td>
+                        <td>Checks if path exists.</td>
+                        <td><code>path.exists("file.txt")</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Subprocess Module</h2>
+            <pre><code>include subprocess</code></pre>
+            <table class="methods-table">
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>run(cmd)</code></td>
+                        <td>Runs command, returns object with stdout/stderr.</td>
+                        <td><code>let res = subprocess.run("ls -la")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>shell(cmd)</code></td>
+                        <td>Runs command purely via shell (cmd/sh).</td>
+                        <td><code>subprocess.shell("echo 'hello'")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>spawn(cmd)</code></td>
+                        <td>Spawns process in background.</td>
+                        <td><code>subprocess.spawn("notepad")</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Buffer Module</h2>
+            <p>Low-level binary data handling.</p>
+            <pre><code>include buffer</code></pre>
+            <table class="methods-table">
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>create(size)</code></td>
+                        <td>Allocates a new buffer.</td>
+                        <td><code>let b = buffer.create(1024)</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>from(str)</code></td>
+                        <td>Creates buffer from string.</td>
+                        <td><code>let b = buffer.from("hello")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>to_hex(buf)</code></td>
+                        <td>Converts buffer to hex string.</td>
+                        <td><code>buffer.to_hex(b)</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Timer Module</h2>
+            <pre><code>include timer</code></pre>
+            <table class="methods-table">
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>sleep(ms)</code></td>
+                        <td>Pauses execution for milliseconds.</td>
+                        <td><code>timer.sleep(1000)</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>start(name)</code></td>
+                        <td>Starts a named timer.</td>
+                        <td><code>timer.start("bench")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>stop(name)</code></td>
+                        <td>Stops timer and returns elapsed time stats.</td>
+                        <td><code>let stats = timer.stop("bench")</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <br>
+            <div class="note">
+                <strong>See Also:</strong> <a href="files.html">SysFiles Module</a> for file reading/writing operations.
+            </div>
+
+        </main>
+    </div>
+    <script src="../js/main.js"></script>
+</body>
+
+</html>

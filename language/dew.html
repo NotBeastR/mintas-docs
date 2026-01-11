@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dew Web Framework - Mintas</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .feature-card {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .feature-card h3 {
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="layout">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="brand">
+                <span>Mintas</span>
+            </div>
+
+            <div class="nav">
+                <a href="../index.html">Overview</a>
+
+                <div class="nav-header">Getting Started</div>
+                <a href="../guides/install.html">Installation</a>
+                <a href="../guides/quickstart.html">Quick Start</a>
+
+                <div class="nav-header">Web Development</div>
+                <a href="dew.html" class="active">Dew Framework</a>
+                <a href="dew-ui.html">Interactive UI</a>
+
+                <div class="nav-header">Language</div>
+                <a href="syntax.html">Syntax & Types</a>
+                <a href="variables.html">Variables & Constants</a>
+                <a href="collections.html">Arrays & Tables</a>
+                <a href="control-flow.html">Control Flow</a>
+                <a href="functions.html">Functions</a>
+                <a href="classes.html">Classes & OOP</a>
+
+                <div class="nav-header">Standard Library</div>
+                <a href="../stdlib/index.html">All Modules</a>
+                <a href="../stdlib/math.html">Math</a>
+                <a href="../stdlib/files.html">SysFiles</a>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <h1>Dew: The Next-Gen Web Framework</h1>
+            <p><strong>Dew</strong> is not just a library; it's a "super-powered" web engine built into the Mintas core.
+                It combines elegant decorator syntax with industrial-grade features like background jobs, real-time
+                WebSockets, and automatic security shielding.</p>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>🚀 Extreme Speed</h3>
+                    <p>Powered by a multi-threaded Rust core, handling thousands of concurrent requests with minimal
+                        overhead.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🛡️ Auto-Shield</h3>
+                    <p>Built-in protection against XSS, CSRF, SQL Injection, and DDoS enabled by a single line of code.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <h3>⚡ Real-time</h3>
+                    <p>Native WebSocket support with room-based broadcasting and event handlers.</p>
+                </div>
+            </div>
+
+            <h2>1. Routing & Dynamic Parameters</h2>
+            <p>Routes are defined using the <code>@</code> decorator. Dynamic path segments are marked with the
+                <code>&gt;</code> prefix.
+            </p>
+            <pre><code>include dew
+let app = dew.main()
+
+# Simple route
+@app.get("/"):
+    return dew.html("<h1>Welcome</h1>")
+end
+
+# Multi-parameter route
+@app.get("/user/&gt;id/post/&gt;postId"):
+    let uId = getback.param("id")
+    let pId = getback.param("postId")
+    return dew.text("User: " + uId + ", Post: " + pId)
+end</code></pre>
+
+            <h2>2. Route Groups</h2>
+            <p>Organize your API using groups. Groups can have their own prefixes and common logic.</p>
+            <pre><code>@app.group("/api/v1"):
+    @app.get("/status"):
+        return dew.json({"status": "ok"})
+    end
+
+    @app.get("/version"):
+        return dew.text("1.0.0")
+    end
+end</code></pre>
+
+            <h2>3. Smart Validation (The <code>==&gt;</code> Operator)</h2>
+            <p>Dew validates incoming requests <em>before</em> they even hit your handler body. If validation fails, it
+                automatically responds with appropriate error messages.</p>
+            <pre><code>@app.post("/login") ==&gt; validate({
+    "user": "required|min:3",
+    "pass": "required|min:8|regex:[A-Z]+"
+}):
+    # Guaranteed to have valid data here
+    let data = getback.json()
+    return dew.json({"token": "secret_hash"})
+end</code></pre>
+
+            <h2>4. The Request Lifecycle (Hooks)</h2>
+            <p>Intercept requests at any point in their lifecycle.</p>
+            <pre><code># Global Logger
+@app.before:
+    say("Incoming: " + getback.method + " " + getback.path)
+end
+
+# Custom Error Page
+@app.catch(404):
+    return dew.render("errors/404.html", {"path": getback.path})
+end</code></pre>
+
+            <h2>5. Real-time WebSockets</h2>
+            <p>Dew bridges the gap between HTTP and WebSockets effortlessly.</p>
+            <pre><code>@app.websocket("/chat")
+
+@app.ws_on_connect:
+    say("Client connected!")
+    dew.ws_broadcast("A new user joined the chat")
+end
+
+@app.ws_on_message:
+    let msg = getback.text()
+    dew.ws_broadcast("User says: " + msg)
+end</code></pre>
+
+            <h2>6. Background Jobs & Queues</h2>
+            <p>Offload heavy tasks to the background without blocking the request-response cycle.</p>
+            <pre><code># Create a background job with 5s delay
+dew.job("send_welcome_email", 5000, {"email": "user@example.com"})
+
+# Add items to a persistent queue
+dew.queue("image_processing", {"id": 1024, "format": "webp"})
+
+# Schedule a task using Cron syntax
+dew.schedule("0 0 * * *", "daily_report")</code></pre>
+
+            <h2>7. Security & Shielding</h2>
+            <p>Enable the enterprise security suite with one command.</p>
+            <pre><code># Enable all protections
+@app.config(security = true)
+
+# Fine-grained control
+dew.protect("csrf")
+dew.protect("sql")
+dew.protect("xss")
+dew.protect("ddos")</code></pre>
+
+            <h2>8. Database Drivers</h2>
+            <p>Dew connects natively to major databases with a unified pooling system.</p>
+            <pre><code># Connect to SQLite
+let db = dew.database("sqlite:///data.db")
+
+# Connect to Postgres
+let pg = dew.database("postgres://user:pass@localhost/mydb")</code></pre>
+
+            <h2>9. The <code>getback</code> Reference</h2>
+            <p>The <code>getback</code> object is your window into the client's request. It captures
+                <strong>everything</strong>.
+            </p>
+            <table class="methods-table">
+                <thead>
+                    <tr>
+                        <th>Property</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>getback.method</code></td>
+                        <td>The HTTP method (GET, POST, etc.)</td>
+                    </tr>
+                    <tr>
+                        <td><code>getback.path</code></td>
+                        <td>The requested route path.</td>
+                    </tr>
+                    <tr>
+                        <td><code>getback.params</code></td>
+                        <td>Table of dynamic path parameters.</td>
+                    </tr>
+                    <tr>
+                        <td><code>getback.query</code></td>
+                        <td>Table of URL query strings.</td>
+                    </tr>
+                    <tr>
+                        <td><code>getback.json</code></td>
+                        <td>Parsed JSON body as a Table.</td>
+                    </tr>
+                    <tr>
+                        <td><code>getback.form</code></td>
+                        <td>Table of form-encoded data.</td>
+                    </tr>
+                    <tr>
+                        <td><code>getback.headers</code></td>
+                        <td>Table of all request headers.</td>
+                    </tr>
+                    <tr>
+                        <td><code>getback.cookies</code></td>
+                        <td>Table of all client cookies.</td>
+                    </tr>
+                    <tr>
+                        <td><code>getback.ip</code></td>
+                        <td>The client's IP address.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>10. Response Helpers</h2>
+            <p>Effortlessly return any format with built-in helpers from the <code>dew</code> (or alias) module.</p>
+            <ul>
+                <li><code>dew.html(src)</code>: Renders a raw HTML string.</li>
+                <li><code>dew.json(tbl)</code>: Automatically converts a table to a JSON string.</li>
+                <li><code>dew.render(file, data)</code>: Renders an <strong>Inview</strong> template.</li>
+                <li><code>dew.file(path)</code>: Streams a file directly to the client.</li>
+                <li><code>dew.redirect(url)</code>: Standard 302 redirect.</li>
+            </ul>
+
+        </main>
+    </div>
+    <script src="../js/main.js"></script>
+</body>
+
+</html>

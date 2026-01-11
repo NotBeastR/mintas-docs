@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Networking Modules - Mintas</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <div class="layout">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="brand">
+                <span>Mintas</span>
+            </div>
+
+            <div class="nav">
+                <a href="../index.html">Overview</a>
+
+                <div class="nav-header">Standard Library</div>
+                <a href="index.html">All Modules</a>
+                <a href="math.html">Math</a>
+                <a href="files.html">SysFiles</a>
+                <a href="datetime.html">DateTime</a>
+                <a href="json.html">JSON</a>
+                <a href="database.html">Database</a>
+                <a href="canvas.html">Canvas</a>
+                <a href="dew.html">Dew</a>
+                <a href="networking.html" class="active">Networking</a>
+                <a href="security.html">Security</a>
+                <a href="system.html">System</a>
+                <a href="formats.html">Data Formats</a>
+                <a href="protocols.html">Protocols</a>
+                <a href="utilities.html">Utilities</a>
+                <a href="ai.html">AI</a>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <h1>Networking Modules</h1>
+            <p>Mintas provides modules for making HTTP requests and connecting to WebSockets.</p>
+
+            <h2>HTTP Requests</h2>
+            <p>The <code>requests</code> module allows you to act as an HTTP client.</p>
+            <pre><code>include requests</code></pre>
+            <table class="methods-table">
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>get(url)</code></td>
+                        <td>Performs a GET request. Returns a table with `status` and `text`.</td>
+                        <td><code>let res = requests.get("https://api.example.com")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>post(url, json)</code></td>
+                        <td>Performs a POST request with optional JSON body.</td>
+                        <td><code>requests.post("https://api.example.com/login", {u: "me"})</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>WebSocket Client</h2>
+            <p>The <code>sockets</code> module handles WebSocket connections.</p>
+            <pre><code>include sockets</code></pre>
+            <table class="methods-table">
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>connect(url)</code></td>
+                        <td>Connects to a WebSocket server.</td>
+                        <td><code>sockets.connect("wss://echo.websocket.org")</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <br>
+            <div class="note">
+                <strong>Note:</strong> to build a Web Server, use the <a href="dew.html">Dew Framework</a> instead.
+            </div>
+
+        </main>
+    </div>
+    <script src="../js/main.js"></script>
+</body>
+
+</html>

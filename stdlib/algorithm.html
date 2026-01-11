@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algorithm - Mintas</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <div class="layout">
+        <nav class="sidebar">
+            <div class="brand"><span>Mintas</span></div>
+            <div class="nav">
+                <a href="../index.html">Overview</a>
+
+                <div class="nav-header">Getting Started</div>
+                <a href="../guides/install.html">Installation</a>
+                <a href="../guides/quickstart.html">Quick Start</a>
+
+                <div class="nav-header">Language</div>
+                <a href="../language/syntax.html">Syntax & Types</a>
+                <a href="../language/variables.html">Variables & Constants</a>
+                <a href="../language/collections.html">Arrays & Tables</a>
+                <a href="../language/control-flow.html">Control Flow</a>
+                <a href="../language/functions.html">Functions</a>
+                <a href="../language/classes.html">Classes & OOP</a>
+                <a href="../language/async.html">Async & Concurrency</a>
+
+                <div class="nav-header">Web Development</div>
+                <a href="../language/dew.html">Dew Framework</a>
+                <a href="../language/dew-ui.html">Interactive UI</a>
+
+                <div class="nav-header">Standard Library</div>
+                <a href="index.html">All Modules</a>
+                <a href="complete-reference.html">Complete Reference</a>
+                <a href="algorithm.html" class="active">Algorithm</a>
+                <a href="math.html">Math</a>
+                <a href="datetime.html">DateTime</a>
+                <a href="json.html">JSON</a>
+                <a href="files.html">SysFiles</a>
+                <a href="system.html">System</a>
+                <a href="networking.html">Networking</a>
+                <a href="database.html">Database</a>
+                <a href="dew.html">Dew Web</a>
+                <a href="canvas.html">Canvas</a>
+                <a href="security.html">Security</a>
+                <a href="formats.html">Data Formats</a>
+                <a href="protocols.html">Protocols</a>
+                <a href="utilities.html">Utilities</a>
+                <a href="ai.html">AI</a>
+            </div>
+        </nav>
+        <main class="main-content">
+            <h1>Algorithm Module</h1>
+            <p>Common computer science algorithms and data structure operations.</p>
+
+            <h2>Sorting</h2>
+            <pre><code>include algorithm
+
+numbers = [3, 1, 4, 1, 5, 9, 2, 6]
+sorted = algorithm.sort(numbers)
+say(sorted)  # [1, 1, 2, 3, 4, 5, 6, 9]
+
+# Reverse sort
+desc = algorithm.sort(numbers, "desc")
+say(desc)  # [9, 6, 5, 4, 3, 2, 1, 1]</code></pre>
+
+            <h2>Array Operations</h2>
+            <pre><code>include algorithm
+
+# Reverse
+reversed = algorithm.reverse([1, 2, 3, 4])
+say(reversed)  # [4, 3, 2, 1]
+
+# Unique values
+unique = algorithm.unique([1, 2, 2, 3, 3, 3])
+say(unique)  # [1, 2, 3]
+
+# Shuffle
+shuffled = algorithm.shuffle([1, 2, 3, 4, 5])</code></pre>
+
+            <h2>Search</h2>
+            <pre><code>include algorithm
+
+arr = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+# Binary search (requires sorted array)
+index = algorithm.binary_search(arr, 5)
+say(index)  # 4
+
+# Linear search
+found = algorithm.find(arr, 7)
+say(found)  # 6</code></pre>
+
+            <h2>API Reference</h2>
+            <ul>
+                <li><code>algorithm.sort(array, order?)</code> - Sort array</li>
+                <li><code>algorithm.reverse(array)</code> - Reverse array</li>
+                <li><code>algorithm.unique(array)</code> - Remove duplicates</li>
+                <li><code>algorithm.shuffle(array)</code> - Randomize order</li>
+                <li><code>algorithm.binary_search(array, value)</code> - Binary search</li>
+                <li><code>algorithm.find(array, value)</code> - Linear search</li>
+            </ul>
+        </main>
+    </div>
+    <script src="../js/main.js"></script>
+</body>
+
+</html>

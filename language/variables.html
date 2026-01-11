@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Variables & Constants - Mintas</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <div class="layout">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="brand">
+                <span>Mintas</span>
+            </div>
+
+            <div class="nav">
+                <a href="../index.html">Overview</a>
+
+                <div class="nav-header">Getting Started</div>
+                <a href="../guides/install.html">Installation</a>
+                <a href="../guides/quickstart.html">Quick Start</a>
+
+                <div class="nav-header">Language</div>
+                <a href="syntax.html">Syntax & Types</a>
+                <a href="variables.html" class="active">Variables & Constants</a>
+                <a href="collections.html">Arrays & Tables</a>
+                <a href="control-flow.html">Control Flow</a>
+                <a href="functions.html">Functions</a>
+                <a href="classes.html">Classes & OOP</a>
+
+                <div class="nav-header">Web Development</div>
+                <a href="dew.html">Dew Framework</a>
+                <a href="dew-ui.html">Interactive UI</a>
+
+                <div class="nav-header">Standard Library</div>
+                <a href="../stdlib/index.html">All Modules</a>
+                <a href="../stdlib/math.html">Math</a>
+                <a href="../stdlib/files.html">SysFiles</a>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <h1>Variables & Constants</h1>
+            <p>Variables are the fundamental building blocks for storing and manipulating data in Mintas. The language
+                provides flexible keywords and clear rules to ensure your code is both readable and safe.</p>
+
+            <h2>Declaration Keywords</h2>
+            <p>Mintas offers two ways to declare data: mutable variables and immutable constants.</p>
+
+            <h3>Mutable Variables (let, so)</h3>
+            <p>Use <code>let</code> or its more expressive alias <code>so</code> to declare variables that can change
+                over time.</p>
+            <pre><code>let score = 10
+so name = "Player1"
+
+score = 25 # Valid reassignment
+name = "Player2"</code></pre>
+
+            <h3>Immutable Constants (const, consta)</h3>
+            <p>Use <code>const</code> or <code>consta</code> for values that should never change. Once assigned, any
+                attempt to modify them will result in a runtime error.</p>
+            <pre><code>const PI = 3.14159
+consta VERSION = "1.0.0"
+
+PI = 4 # Error: ConstantReassignment</code></pre>
+
+            <h2>Naming Rules (Identifiers)</h2>
+            <p>To keep code consistent and valid, Mintas follows specific naming conventions:</p>
+            <ul>
+                <li><strong>Start Character:</strong> Must begin with a letter (<code>a-z</code>, <code>A-Z</code>) or
+                    an underscore (<code>_</code>).</li>
+                <li><strong>Follow-up Characters:</strong> Can include letters, underscores, and numbers
+                    (<code>0-9</code>).</li>
+                <li><strong>Case Sensitivity:</strong> <code>userValue</code> and <code>uservalue</code> are treated as
+                    two different variables.</li>
+                <li><strong>Reserved Words:</strong> You cannot use keywords like <code>if</code>, <code>while</code>,
+                    or <code>func</code> as variable names.</li>
+            </ul>
+
+            <h2>The 'is' Alias</h2>
+            <p>To make your code read more like natural English, you can replace the assignment operator
+                (<code>=</code>) with the keyword <code>is</code>.</p>
+            <pre><code>let age is 25
+so status is "Active"
+const gravity is 9.81</code></pre>
+
+            <h2>Dynamic Typing</h2>
+            <p>Mintas is dynamically typed, meaning you do not need to declare a variable's type. A variable can hold
+                any kind of data and can even change its data type during its lifecycle (though this is generally
+                discouraged for clarity).</p>
+            <pre><code>let data = 100      # Currently a Number
+data = "Converted" # Now a String
+data = empty       # Now Empty</code></pre>
+
+            <h2>Scope</h2>
+            <p>Variables in Mintas are globally accessible within the script unless they are declared inside a
+                <code>class</code> or as function parameters. Inside a class, properties must be accessed via the
+                <code>this</code> keyword.
+            </p>
+
+        </main>
+    </div>
+    <script src="../js/main.js"></script>
+</body>
+
+</html>

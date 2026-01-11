@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI - Mintas</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <div class="layout">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="brand">
+                <span>Mintas</span>
+            </div>
+
+            <div class="nav">
+                <a href="../index.html">Overview</a>
+                <div class="nav-header">Standard Library</div>
+                <a href="index.html">All Modules</a>
+                <a href="math.html">Math</a>
+                <a href="files.html">SysFiles</a>
+                <a href="datetime.html">DateTime</a>
+                <a href="json.html">JSON</a>
+                <a href="database.html">Database</a>
+                <a href="canvas.html">Canvas</a>
+                <a href="dew.html">Dew</a>
+                <a href="networking.html">Networking</a>
+                <a href="security.html">Security</a>
+                <a href="system.html">System</a>
+                <a href="formats.html">Data Formats</a>
+                <a href="protocols.html">Protocols</a>
+                <a href="utilities.html">Utilities</a>
+                <a href="ai.html" class="active">AI</a>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <h1>AI Integration</h1>
+            <p>Modules for interacting with AI services and large language models.</p>
+
+            <h2>OpenAI Module</h2>
+            <p>Client for OpenAI API services, including Chat, Completion, and Image Generation.</p>
+            <pre><code>include openai</code></pre>
+
+            <blockquote>
+                [!NOTE]
+                Requires the <code>networking</code> feature to be enabled.
+            </blockquote>
+
+            <table class="methods-table">
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>chat_completion(key, msgs, [model])</code></td>
+                        <td>Generates a chat response.</td>
+                        <td><code>openai.chat_completion(key, [{role: "user", content: "Hi"}])</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>completion(key, prompt, [model])</code></td>
+                        <td>Generates a text completion.</td>
+                        <td><code>openai.completion(key, "Once upon a time")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>image_generation(key, prompt, [size])</code></td>
+                        <td>Generates images via DALL-E.</td>
+                        <td><code>openai.image_generation(key, "A red cat")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>embedding(key, input, [model])</code></td>
+                        <td>Generates vector embeddings for a string.</td>
+                        <td><code>openai.embedding(key, "Search query")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>moderation(key, input)</code></td>
+                        <td>Checks if text violates content policies.</td>
+                        <td><code>openai.moderation(key, "Some text")</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Configuration</h3>
+            <table class="methods-table">
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>set_base_url(url)</code></td>
+                        <td>Overrides the API base URL (defaults to api.openai.com).</td>
+                        <td><code>openai.set_base_url("https://my-proxy.com")</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </main>
+    </div>
+    <script src="../js/main.js"></script>
+</body>
+
+</html>

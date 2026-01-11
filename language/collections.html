@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrays & Tables - Mintas</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <div class="layout">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="brand">
+                <span>Mintas</span>
+            </div>
+
+            <div class="nav">
+                <a href="../index.html">Overview</a>
+
+                <div class="nav-header">Getting Started</div>
+                <a href="../guides/install.html">Installation</a>
+                <a href="../guides/quickstart.html">Quick Start</a>
+
+                <div class="nav-header">Language</div>
+                <a href="syntax.html">Syntax & Types</a>
+                <a href="variables.html">Variables & Constants</a>
+                <a href="collections.html" class="active">Arrays & Tables</a>
+                <a href="control-flow.html">Control Flow</a>
+                <a href="functions.html">Functions</a>
+                <a href="classes.html">Classes & OOP</a>
+
+                <div class="nav-header">Web Development</div>
+                <a href="dew.html">Dew Framework</a>
+                <a href="dew-ui.html">Interactive UI</a>
+
+                <div class="nav-header">Standard Library</div>
+                <a href="../stdlib/index.html">All Modules</a>
+                <a href="../stdlib/math.html">Math</a>
+                <a href="../stdlib/files.html">SysFiles</a>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <h1>Arrays & Tables</h1>
+            <p>Mintas provides powerful, built-in collection types with a rich set of methods for data manipulation.</p>
+
+            <h2>Arrays (1-Indexed)</h2>
+            <p>Arrays are ordered lists of values. In Mintas, arrays are <strong>1-indexed</strong>, meaning the first
+                element is at position 1.</p>
+            <pre><code>let fruits = ["Apple", "Banana", "Cherry"]
+say(fruits[1]) # Apple</code></pre>
+
+            <h3>Array Methods</h3>
+            <table class="methods-table">
+                <thead>
+                    <tr>
+                        <th>Method</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>len()</code></td>
+                        <td>Returns the number of elements.</td>
+                        <td><code>fruits.len()</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>push(val)</code></td>
+                        <td>Adds an element to the end.</td>
+                        <td><code>fruits.push("Date")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>pop()</code></td>
+                        <td>Removes and returns the last element.</td>
+                        <td><code>fruits.pop()</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>insert(idx, val)</code></td>
+                        <td>Inserts value at position.</td>
+                        <td><code>fruits.insert(2, "Mango")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>remove(val)</code></td>
+                        <td>Removes the first occurrence.</td>
+                        <td><code>fruits.remove("Apple")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>clear()</code></td>
+                        <td>Removes all elements.</td>
+                        <td><code>fruits.clear()</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>reverse()</code></td>
+                        <td>Reverses the order in place.</td>
+                        <td><code>fruits.reverse()</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>contains(val)</code></td>
+                        <td>Checks if value exists.</td>
+                        <td><code>fruits.contains("Banana")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>index(val)</code></td>
+                        <td>Returns 1-indexed position.</td>
+                        <td><code>fruits.index("Cherry")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>slice(start, end)</code></td>
+                        <td>Returns sub-array.</td>
+                        <td><code>fruits.slice(1, 2)</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>join(sep)</code></td>
+                        <td>Joins into a string.</td>
+                        <td><code>fruits.join(", ")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>sort()</code></td>
+                        <td>Sorts and returns array.</td>
+                        <td><code>fruits.sort()</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 style="margin-top: 2rem;">Functional Methods</h3>
+            <pre><code>let nums = [1, 2, 3, 4, 5]
+let doubled = nums.map(lamda(n): n * 2)
+let evens = nums.filter(lamda(n): n % 2 == 0)
+let sum = nums.reduce(lamda(acc, n): acc + n, 0)</code></pre>
+
+            <h2 style="margin-top: 3rem;">Tables (Key-Value)</h2>
+            <p>Tables (Maps) store data as key-value pairs. Keys are always strings.</p>
+            <pre><code>let user = { "name": "Alice", "level": 10 }
+say($user.name) # Alice</code></pre>
+
+            <h3>Table Methods</h3>
+            <table class="methods-table">
+                <thead>
+                    <tr>
+                        <th>Method</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>len()</code></td>
+                        <td>Returns number of pairs.</td>
+                        <td><code>user.len()</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>keys()</code></td>
+                        <td>Returns array of keys.</td>
+                        <td><code>user.keys()</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>values()</code></td>
+                        <td>Returns array of values.</td>
+                        <td><code>user.values()</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>has(key)</code></td>
+                        <td>Returns true if key exists.</td>
+                        <td><code>user.has("name")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>remove(key)</code></td>
+                        <td>Removes and returns value.</td>
+                        <td><code>user.remove("level")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>merge(table)</code></td>
+                        <td>Merges into this table.</td>
+                        <td><code>user.merge({"role": "admin"})</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 style="margin-top: 2rem;">Web Context Methods</h3>
+            <p>In Dew routes, the <code>getback</code> table has extra methods:</p>
+            <pre><code>@app.get("/user/>id"):
+    let id = getback.param("id")
+    let q = getback.query("q")
+    let token = getback.header("Auth")
+end</code></pre>
+        </main>
+    </div>
+    <script src="../js/main.js"></script>
+</body>
+
+</html>

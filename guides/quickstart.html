@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quick Start - Mintas</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <div class="layout">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="brand">
+                <span>Mintas</span>
+            </div>
+
+            <div class="nav">
+                <a href="../index.html">Overview</a>
+
+                <div class="nav-header">Getting Started</div>
+                <a href="install.html">Installation</a>
+                <a href="quickstart.html" class="active">Quick Start</a>
+
+                <div class="nav-header">Language</div>
+                <a href="../language/syntax.html">Syntax & Types</a>
+                <a href="../language/variables.html">Variables & Constants</a>
+                <a href="../language/collections.html">Arrays & Tables</a>
+                <a href="../language/control-flow.html">Control Flow</a>
+                <a href="../language/functions.html">Functions</a>
+                <a href="../language/classes.html">Classes & OOP</a>
+
+                <div class="nav-header">Web Development</div>
+                <a href="../language/dew.html">Dew Framework</a>
+                <a href="../language/dew-ui.html">Interactive UI</a>
+
+                <div class="nav-header">Standard Library</div>
+                <a href="../stdlib/index.html">All Modules</a>
+                <a href="../stdlib/math.html">Math</a>
+                <a href="../stdlib/files.html">SysFiles</a>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <h1>Quick Start</h1>
+            <p>Welcome to Mintas! This guide will help you write and run your first Mintas program in minutes.</p>
+
+            <h2>1. Interactive Mode (REPL)</h2>
+            <p>Mintas comes with a Read-Eval-Print Loop (REPL) that allows you to run code instantly. Open your terminal
+                and type <code>mintas</code> without any arguments:</p>
+
+            <pre><code>$ mintas
+Mintas v1.0.0 (REPL)
+> say("Hello from REPL!")
+Hello from REPL!
+> 10 + 20
+30
+> exit</code></pre>
+
+            <h2>2. Your First Script</h2>
+            <p>Create a file named <code>hello.as</code> using your favorite text editor.</p>
+
+            <pre><code># hello.as
+
+# Define a variable
+let name = "Developer"
+
+say("Hello, " + name + "!")
+
+# A simple loop using the 'goto' keyword
+goto(i = 3 times):
+    say("Counting: " + i)
+end</code></pre>
+
+            <h2>3. Running the Script</h2>
+            <p>Run your script from the terminal:</p>
+            <pre><code>mintas hello.as</code></pre>
+
+            <p>You should see:</p>
+            <pre><code>Hello, Developer!
+Counting: 1
+Counting: 2
+Counting: 3</code></pre>
+
+            <div class="note"
+                style="margin-top: 2rem; border-left: 4px solid var(--accent-color); padding: 1rem; background: var(--bg-secondary);">
+                <strong>Did you notice?</strong>
+                <p style="margin-bottom: 0;">Loops in Mintas are 1-indexed by default! The counter <code>i</code> starts
+                    at 1, not 0.</p>
+            </div>
+
+            <h2>Next Steps</h2>
+            <p>Now that you've got code running, let's dive into the language fundamentals.</p>
+            <a href="../language/syntax.html" class="btn" style="
+                display: inline-block;
+                background-color: var(--primary-color);
+                color: white;
+                padding: 0.75rem 1.5rem;
+                border-radius: 0.375rem;
+                font-weight: 600;
+                margin-top: 1rem;
+                text-decoration: none;
+            ">Learn Syntax & Types →</a>
+
+        </main>
+    </div>
+    <script src="../js/main.js"></script>
+</body>
+
+</html>

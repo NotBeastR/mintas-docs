@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Standard Library - Mintas</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <div class="layout">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="brand">
+                <span>Mintas</span>
+            </div>
+
+            <div class="nav">
+                <a href="../index.html">Overview</a>
+
+                <div class="nav-header">Getting Started</div>
+                <a href="../guides/install.html">Installation</a>
+                <a href="../guides/quickstart.html">Quick Start</a>
+
+                <div class="nav-header">Language</div>
+                <a href="../language/syntax.html">Syntax & Types</a>
+                <a href="../language/variables.html">Variables & Constants</a>
+                <a href="../language/collections.html">Arrays & Tables</a>
+                <a href="../language/control-flow.html">Control Flow</a>
+                <a href="../language/functions.html">Functions</a>
+                <a href="../language/classes.html">Classes & OOP</a>
+                <a href="../language/async.html">Async & Concurrency</a>
+
+                <div class="nav-header">Web Development</div>
+                <a href="../language/dew.html">Dew Framework</a>
+                <a href="../language/dew-ui.html">Interactive UI</a>
+
+                <div class="nav-header">Standard Library</div>
+                <a href="index.html" class="active">All Modules</a>
+                <a href="complete-reference.html">Complete Reference</a>
+                <a href="algorithm.html">Algorithm</a>
+                <a href="math.html">Math</a>
+                <a href="datetime.html">DateTime</a>
+                <a href="json.html">JSON</a>
+                <a href="files.html">SysFiles</a>
+                <a href="system.html">System</a>
+                <a href="networking.html">Networking</a>
+                <a href="database.html">Database</a>
+                <a href="dew.html">Dew Web</a>
+                <a href="canvas.html">Canvas</a>
+                <a href="security.html">Security</a>
+                <a href="formats.html">Data Formats</a>
+                <a href="protocols.html">Protocols</a>
+                <a href="utilities.html">Utilities</a>
+                <a href="ai.html">AI</a>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <h1>Standard Library</h1>
+            <p>Mintas comes with a "Batteries Included" philosophy, offering a vast array of built-in modules for
+                everything from file manipulation to web requests and database interaction.</p>
+
+            <h2>Included Modules</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>Core</h3>
+                    <ul>
+                        <li><a href="math.html"><strong>math</strong></a>: Constants and advanced mathematical
+                            functions.</li>
+                        <li><a href="files.html"><strong>sysfiles</strong></a>: File system operations.</li>
+                        <li><a href="datetime.html"><strong>datetime</strong></a>: Handling dates and times.</li>
+                        <li><a href="system.html"><strong>system</strong></a>: OS, Env, Path, and Processes.</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h3>Web & Game</h3>
+                    <ul>
+                        <li><a href="dew.html"><strong>dew</strong></a>: Full-stack Web Framework.</li>
+                        <li><a href="canvas.html"><strong>canvas</strong></a>: 2D Game Engine & Graphics.</li>
+                        <li><a href="networking.html"><strong>networking</strong></a>: HTTP & WebSocket clients.</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h3>Protocols</h3>
+                    <ul>
+                        <li><a href="protocols.html"><strong>dns</strong></a>: Domain resolution.</li>
+                        <li><a href="protocols.html"><strong>ftp</strong></a>: File Transfer Protocol.</li>
+                        <li><a href="protocols.html"><strong>mqtt</strong></a>: IoT messaging.</li>
+                        <li><a href="protocols.html"><strong>smtp</strong></a>: Sending emails.</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h3>Data & Serialization</h3>
+                    <ul>
+                        <li><a href="json.html"><strong>json</strong></a>: JSON manipulation.</li>
+                        <li><a href="database.html"><strong>database</strong></a>: SQLite and Redis support.</li>
+                        <li><a href="formats.html"><strong>formats</strong></a>: CSV, YAML, PDF, QR Codes.</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h3>AI & Security</h3>
+                    <ul>
+                        <li><a href="ai.html"><strong>openai</strong></a>: Integrated AI support.</li>
+                        <li><a href="security.html"><strong>security</strong></a>: Crypto, Hash, UUID, Base64.</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h3>Utilities</h3>
+                    <ul>
+                        <li><a href="utilities.html"><strong>utilities</strong></a>: CLI, Colors, Validation, Cache.
+                        </li>
+                        <li><a href="utilities.html"><strong>algorithms</strong></a>: Common CS algorithms.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h2 style="margin-top: 3rem;">Using Modules</h2>
+            <p>Use the <code>include</code> keyword to bring a module into your script.</p>
+            <pre><code>include math
+include sysfiles as fs
+
+say(math.PI)
+fs.write("data.txt", "Hello!")</code></pre>
+
+        </main>
+    </div>
+    <script src="../js/main.js"></script>
+</body>
+
+</html>

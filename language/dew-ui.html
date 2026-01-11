@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dew Interactive UI & Animations - Mintas</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .demo-box {
+            width: 100px;
+            height: 100px;
+            background: var(--primary-color);
+            margin: 1rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .anim-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
+            padding: 1rem 0;
+        }
+
+        .dsl-tag {
+            color: #ff79c6;
+            font-weight: bold;
+        }
+
+        .dsl-prop {
+            color: #50fa7b;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="layout">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="brand">
+                <span>Mintas</span>
+            </div>
+
+            <div class="nav">
+                <a href="../index.html">Overview</a>
+
+                <div class="nav-header">Getting Started</div>
+                <a href="../guides/install.html">Installation</a>
+                <a href="../guides/quickstart.html">Quick Start</a>
+
+                <div class="nav-header">Web Development</div>
+                <a href="dew.html">Dew Framework</a>
+                <a href="dew-ui.html" class="active">Interactive UI</a>
+
+                <div class="nav-header">Language</div>
+                <a href="syntax.html">Syntax & Types</a>
+                <a href="variables.html">Variables & Constants</a>
+                <a href="collections.html">Arrays & Tables</a>
+                <a href="control-flow.html">Control Flow</a>
+                <a href="functions.html">Functions</a>
+                <a href="classes.html">Classes & OOP</a>
+
+                <div class="nav-header">Standard Library</div>
+                <a href="../stdlib/index.html">All Modules</a>
+                <a href="../stdlib/math.html">Math</a>
+                <a href="../stdlib/files.html">SysFiles</a>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <h1>Dew Interactive UI & Animations</h1>
+            <p>Dew features a high-performance, reactive front-end runtime and a built-in <strong>UI DSL</strong>
+                (Domain Specific Language) that allows you to build interactive user interfaces entirely from within
+                Mintas templates—no external JavaScript required.</p>
+
+            <h2>1. The <code>&lt;dew&gt;</code> Tag</h2>
+            <p>The <code>&lt;dew&gt;</code> tag is a special element that understands the Dew UI DSL. It allows you to
+                define styles, event handlers, and reactive behavior using a shorthand syntax.</p>
+
+            <pre><code># Inside a .html template
+&lt;dew id="my-box" class="card"&gt;
+    bg: #2d3436
+    text-color: "#fff"
+    p: 20px
+    rounded: 12px
+    center: true
+    
+    text: "Click Me!"
+    
+    on-click:
+        increment
+        effect: bounce
+    end
+&lt;/dew&gt;</code></pre>
+
+            <h2>2. UI Shorthand DSL</h2>
+            <p>Dew maps shorthand properties directly to optimized CSS. Detailed below are the most common properties:
+            </p>
+
+            <table class="methods-table">
+                <thead>
+                    <tr>
+                        <th>Property</th>
+                        <th>CSS Equivalent</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>bg</code></td>
+                        <td>background</td>
+                        <td><code>bg: "#ff0000"</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>p / m</code></td>
+                        <td>padding / margin</td>
+                        <td><code>p: 10px</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>px / py</code></td>
+                        <td>padding-x / y</td>
+                        <td><code>px: 2rem</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>rounded</code></td>
+                        <td>border-radius</td>
+                        <td><code>rounded: 8px</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>center</code></td>
+                        <td>Flex centering</td>
+                        <td><code>center: true</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>glass</code></td>
+                        <td>Glassmorphism</td>
+                        <td><code>effect: glass</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>shadow</code></td>
+                        <td>box-shadow (presets)</td>
+                        <td><code>shadow: lg</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>w / h</code></td>
+                        <td>width / height</td>
+                        <td><code>w: 100%</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>3. Reactive State & Binding</h2>
+            <p>Dew templates are reactive. When variables in your Mintas data change, the UI updates automatically.</p>
+            <ul>
+                <li><strong><code>dew-bind="key"</code></strong>: Links an element's text/value to a state key.</li>
+                <li><strong><code>dew-model="key"</code></strong>: Two-way binding for inputs.</li>
+                <li><strong><code>dew-show/hide="key"</code></strong>: Toggle visibility based on state.</li>
+            </ul>
+
+            <pre><code>&lt;input type="text" dew-model="username" /&gt;
+&lt;h1&gt;Hello, ?( username )?&lt;/h1&gt;</code></pre>
+
+            <h2>4. Built-in Animations</h2>
+            <p>Dew includes a massive library of high-performance CSS animations. You can trigger them from the server
+                using <code>dew.signal()</code> or from the client UI DSL.</p>
+
+            <h3>Entrance & Motion</h3>
+            <div class="anim-grid">
+                <div class="demo-box">fade-in</div>
+                <div class="demo-box">pop-in</div>
+                <div class="demo-box">bounce</div>
+                <div class="demo-box">wiggle</div>
+                <div class="demo-box">slide-up</div>
+                <div class="demo-box">spin</div>
+            </div>
+
+            <h3>The "Super-Power" Animations</h3>
+            <p>Special effects designed to wow users:</p>
+            <ul>
+                <li><strong><code>thanos</code></strong>: Element dissolves into dust and vanishes.</li>
+                <li><strong><code>glitch</code></strong>: Digital distortion effect.</li>
+                <li><strong><code>typewriter</code></strong>: Text typing animation.</li>
+                <li><strong><code>rainbow</code></strong>: Shifting color cycle.</li>
+                <li><strong><code>neon</code></strong>: Pulsing glowing border.</li>
+            </ul>
+
+            <h2>5. Signals & Commands</h2>
+            <p>Commands allowed inside <code>on-click:</code> or other event blocks:</p>
+            <table class="methods-table">
+                <thead>
+                    <tr>
+                        <th>Command</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>increment [key]</code></td>
+                        <td>Increments a reactive counter.</td>
+                    </tr>
+                    <tr>
+                        <td><code>decrement [key]</code></td>
+                        <td>Decrements a reactive counter.</td>
+                    </tr>
+                    <tr>
+                        <td><code>effect: [name]</code></td>
+                        <td>Triggers a named animation.</td>
+                    </tr>
+                    <tr>
+                        <td><code>toggle [id]</code></td>
+                        <td>Toggles visibility of another element.</td>
+                    </tr>
+                    <tr>
+                        <td><code>show / hide [id]</code></td>
+                        <td>Explicitly sets visibility.</td>
+                    </tr>
+                    <tr>
+                        <td><code>emit [event]</code></td>
+                        <td>Emits a global Dew event.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>6. Server Signals</h2>
+            <p>The server can "reach out" and manipulate the browser UI directly using <code>dew.signal()</code>.</p>
+            <pre><code>@app.post("/update"):
+    # Change the theme and text of an element remotely
+    return dew.signal("alert-box", {
+        "theme": "success",
+        "text": "Data Saved!",
+        "animation": "pop-in"
+    })
+end</code></pre>
+
+        </main>
+    </div>
+    <script src="../js/main.js"></script>
+</body>
+
+</html>

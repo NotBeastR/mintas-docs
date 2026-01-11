@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Standard Library Reference - Mintas</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css">
+</head>
+
+<body>
+    <div class="layout">
+        <nav class="sidebar">
+            <div class="brand"><span>Mintas</span></div>
+            <div class="nav">
+                <a href="../index.html">Overview</a>
+
+                <div class="nav-header">Getting Started</div>
+                <a href="../guides/install.html">Installation</a>
+                <a href="../guides/quickstart.html">Quick Start</a>
+
+                <div class="nav-header">Language</div>
+                <a href="../language/syntax.html">Syntax & Types</a>
+                <a href="../language/variables.html">Variables & Constants</a>
+                <a href="../language/collections.html">Arrays & Tables</a>
+                <a href="../language/control-flow.html">Control Flow</a>
+                <a href="../language/functions.html">Functions</a>
+                <a href="../language/classes.html">Classes & OOP</a>
+                <a href="../language/async.html">Async & Concurrency</a>
+
+                <div class="nav-header">Web Development</div>
+                <a href="../language/dew.html">Dew Framework</a>
+                <a href="../language/dew-ui.html">Interactive UI</a>
+
+                <div class="nav-header">Standard Library</div>
+                <a href="index.html">All Modules</a>
+                <a href="complete-reference.html" class="active">Complete Reference</a>
+                <a href="algorithm.html">Algorithm</a>
+                <a href="math.html">Math</a>
+                <a href="datetime.html">DateTime</a>
+                <a href="json.html">JSON</a>
+                <a href="files.html">SysFiles</a>
+                <a href="system.html">System</a>
+                <a href="networking.html">Networking</a>
+                <a href="database.html">Database</a>
+                <a href="dew.html">Dew Web</a>
+                <a href="canvas.html">Canvas</a>
+                <a href="security.html">Security</a>
+                <a href="formats.html">Data Formats</a>
+                <a href="protocols.html">Protocols</a>
+                <a href="utilities.html">Utilities</a>
+                <a href="ai.html">AI</a>
+            </div>
+        </nav>
+        <main class="main-content">
+            <h1>Complete Standard Library Reference</h1>
+            <p>Comprehensive reference for all 52 Mintas standard library modules.</p>
+
+            <h2 id="algorithm">algorithm - Algorithms & Data Structures</h2>
+            <pre><code class="language-mintas">include algorithm
+sorted = algorithm.sort([3, 1, 4, 1, 5])
+unique = algorithm.unique([1, 2, 2, 3])
+reversed = algorithm.reverse([1, 2, 3])</code></pre>
+
+            <h2 id="archive">archive - Archive Operations</h2>
+            <pre><code class="language-mintas">include archive
+archive.zip("folder", "output.zip")
+archive.unzip("archive.zip", "dest")</code></pre>
+
+            <h2 id="asjokes">asjokes - Jokes API</h2>
+            <pre><code class="language-mintas">include asjokes
+joke = asjokes.random()
+say(joke)</code></pre>
+
+            <h2 id="base64">base64 - Base64 Encoding</h2>
+            <pre><code class="language-mintas">include base64
+encoded = base64.encode("Hello")
+decoded = base64.decode(encoded)</code></pre>
+
+            <h2 id="buffer">buffer - Binary Buffers</h2>
+            <pre><code class="language-mintas">include buffer
+buf = buffer.create(1024)
+buffer.write(buf, "data")
+data = buffer.read(buf)</code></pre>
+
+            <h2 id="c_bytes">c_bytes - C Library Interop</h2>
+            <pre><code class="language-mintas">include c_bytes
+c_bytes.load("mylib.dll")
+result = c_bytes.call("function", arg1, arg2)</code></pre>
+
+            <h2 id="cache">cache - Caching</h2>
+            <pre><code class="language-mintas">include cache
+cache.set("key", "value", 60)  # 60s TTL
+value = cache.get("key")</code></pre>
+
+            <h2 id="canvas">canvas - 2D Graphics & Games</h2>
+            <pre><code class="language-mintas">include canvas
+canvas.create("Game", 800, 600)
+sprite = canvas.sprite("player", 100, 100, 32, 32, "#00FF00")
+canvas.update()</code></pre>
+
+            <h2 id="cert">cert - SSL Certificates</h2>
+            <pre><code class="language-mintas">include cert
+cert.verify("https://example.com")
+info = cert.get_info("https://example.com")</code></pre>
+
+            <h2 id="cluster">cluster - Process Clustering</h2>
+            <pre><code class="language-mintas">include cluster
+if (cluster.is_master()):
+    cluster.fork()
+else:
+    say("Worker " + cluster.worker_id())
+end</code></pre>
+
+            <h2 id="colors">colors - Color Utilities</h2>
+            <pre><code class="language-mintas">include colors
+hex = colors.rgb_to_hex(255, 0, 0)
+rgb = colors.hex_to_rgb("#FF0000")</code></pre>
+
+            <h2 id="compress">compress - Compression</h2>
+            <pre><code class="language-mintas">include compress
+compressed = compress.gzip("text")
+decompressed = compress.gunzip(compressed)</code></pre>
+
+            <h2 id="cron">cron - Scheduled Tasks</h2>
+            <pre><code class="language-mintas">include cron
+cron.schedule("0 9 * * *", fn():
+    say("Good morning!")
+end)</code></pre>
+
+            <h2 id="crypto">crypto - Cryptography</h2>
+            <pre><code class="language-mintas">include crypto
+hash = crypto.sha256("password")
+encrypted = crypto.encrypt_aes("data", "key")
+decrypted = crypto.decrypt_aes(encrypted, "key")</code></pre>
+
+            <h2 id="csv">csv - CSV Files</h2>
+            <pre><code class="language-mintas">include csv
+data = csv.read("data.csv")
+csv.write("output.csv", data)</code></pre>
+
+            <h2 id="datetime">datetime - Date & Time</h2>
+            <pre><code class="language-mintas">include datetime
+now = datetime.now()
+formatted = datetime.strftime(now, "%Y-%m-%d") # Use correct format string
+future = datetime.add_days(now, 7)</code></pre>
+
+            <h2 id="dew">dew - Web Framework</h2>
+            <pre><code class="language-mintas">include dew
+app = dew.main()
+@app.get("/")
+    return dew.text("Hello!")
+end
+@app.serve(3000)</code></pre>
+
+            <h2 id="dns">dns - DNS Resolution</h2>
+            <pre><code class="language-mintas">include dns
+ip = dns.resolve("google.com")
+say(ip)</code></pre>
+
+            <h2 id="env">env - Environment Variables</h2>
+            <pre><code class="language-mintas">include env
+api_key = env.get("API_KEY")
+env.set("MY_VAR", "value")</code></pre>
+
+            <h2 id="events">events - Event Emitter</h2>
+            <pre><code class="language-mintas">include events
+emitter = events.create()
+events.on(emitter, "data", fn(data):
+    say(data)
+end)
+events.emit(emitter, "data", "Hello!")</code></pre>
+
+            <h2 id="ftp">ftp - FTP Client</h2>
+            <pre><code class="language-mintas">include ftp
+ftp.connect("ftp.example.com", "user", "pass")
+ftp.upload("local.txt", "remote.txt")</code></pre>
+
+            <h2 id="graphql">graphql - GraphQL Client</h2>
+            <pre><code class="language-mintas">include graphql
+query = "{ user(id: 1) { name } }"
+result = graphql.query("https://api.com/graphql", query)</code></pre>
+
+            <h2 id="hash">hash - Hashing Functions</h2>
+            <pre><code class="language-mintas">include hash
+md5 = hash.md5("text")
+sha256 = hash.sha256("text")
+bcrypt = hash.bcrypt("password")</code></pre>
+
+            <h2 id="json">json - JSON Parsing</h2>
+            <pre><code class="language-mintas">include json
+data = {"name": "Alice", "age": 30}
+json_str = json.stringify(data)
+parsed = json.parse(json_str)</code></pre>
+
+            <h2 id="math">math - Mathematical Functions</h2>
+            <pre><code class="language-mintas">include math
+say(math.sqrt(16))      # 4
+say(math.pow(2, 3))     # 8
+say(math.pi)            # 3.14159... (lowercase)</code></pre>
+
+            <h2 id="mqtt">mqtt - MQTT Protocol</h2>
+            <pre><code class="language-mintas">include mqtt
+client = mqtt.connect("broker.example.com")
+mqtt.publish(client, "topic", "message")
+mqtt.subscribe(client, "topic", fn(msg):
+    say(msg)
+end)</code></pre>
+
+            <h2 id="mycli">mycli - CLI Framework</h2>
+            <pre><code class="language-mintas">include mycli
+app = mycli.app("mytool", "Description")
+mycli.add_command(app, "hello", fn():
+    say("Hello!")
+end)
+mycli.run(app)</code></pre>
+
+            <h2 id="mypdf">mypdf - PDF Generation</h2>
+            <pre><code class="language-mintas">include mypdf
+pdf = mypdf.create()
+mypdf.add_page(pdf)
+mypdf.add_text(pdf, "Hello PDF!")
+mypdf.save(pdf, "output.pdf")</code></pre>
+
+            <h2 id="myqr">myqr - QR Code Generation</h2>
+            <pre><code class="language-mintas">include myqr
+myqr.generate("https://example.com", "qrcode.png")</code></pre>
+
+            <h2 id="myyaml">myyaml - YAML Parser</h2>
+            <pre><code class="language-mintas">include myyaml
+data = myyaml.parse("config.yaml")
+myyaml.write("output.yaml", data)</code></pre>
+
+            <h2 id="node2as">node2as - Node.js Interop</h2>
+            <pre><code class="language-mintas">include node2as
+fs = node2as.require("fs")
+content = node2as.call(fs, "readFileSync", "file.txt", "utf8")
+node2as.eval("console.log('Hello!')")</code></pre>
+
+            <h2 id="openai">openai - OpenAI API</h2>
+            <pre><code class="language-mintas">include openai
+openai.set_key("sk-...")
+response = openai.chat([
+    {"role": "user", "content": "Hello!"}
+])
+say(response.content)</code></pre>
+
+            <h2 id="os">os - Operating System</h2>
+            <pre><code class="language-mintas">include os
+say(os.platform())  # Windows/Linux/macOS
+say(os.cwd())
+os.execute("ls")</code></pre>
+
+            <h2 id="path">path - Path Manipulation</h2>
+            <pre><code class="language-mintas">include path
+full = path.join("folder", "file.txt")
+say(path.exists(full))
+say(path.basename(full))</code></pre>
+
+            <h2 id="ping">ping - Network Ping</h2>
+            <pre><code class="language-mintas">include ping
+latency = ping.host("google.com")
+say("Latency: " + latency + "ms")</code></pre>
+
+            <h2 id="postsql">postsql - PostgreSQL</h2>
+            <pre><code class="language-mintas">include postsql
+db = postsql.connect("postgresql://user:pass@localhost/db")
+result = postsql.query(db, "SELECT * FROM users")</code></pre>
+
+            <h2 id="queue">queue - Queue Data Structure</h2>
+            <pre><code class="language-mintas">include queue
+q = queue.create()
+queue.push(q, "item1")
+item = queue.pop(q)</code></pre>
+
+            <h2 id="redis2">redis2 - Redis Client</h2>
+            <pre><code class="language-mintas">include redis2
+redis2.connect("localhost", 6379)
+redis2.set("key", "value")
+value = redis2.get("key")</code></pre>
+
+            <h2 id="requests">requests - HTTP Client</h2>
+            <pre><code class="language-mintas">include requests
+response = requests.get("https://api.example.com")
+say(response.status)
+say(response.text)       # 'text', not 'body'</code></pre>
+
+            <h2 id="slug">slug - URL Slugs</h2>
+            <pre><code class="language-mintas">include slug
+slug_text = slug.create("Hello World!")
+say(slug_text)  # "hello-world"</code></pre>
+
+            <h2 id="smtp">smtp - Email (SMTP)</h2>
+            <pre><code class="language-mintas">include smtp
+smtp.send_email(
+    "smtp.gmail.com",
+    "from@example.com",
+    "to@example.com",
+    "Subject",
+    "Message"
+)</code></pre>
+
+            <h2 id="sockets">sockets - TCP/UDP Sockets</h2>
+            <pre><code class="language-mintas">include sockets
+server = sockets.tcp_server("127.0.0.1", 8080)
+client = server.accept()
+data = client.recv(1024)</code></pre>
+
+            <h2 id="sqlite3">sqlite3 - SQLite Database</h2>
+            <pre><code class="language-mintas">include sqlite3
+db = sqlite3.connect("database.db")
+sqlite3.execute(db, "CREATE TABLE users (id INT, name TEXT)")
+rows = sqlite3.query(db, "SELECT * FROM users")</code></pre>
+
+            <h2 id="ssh">ssh - SSH Client</h2>
+            <pre><code class="language-mintas">include ssh
+ssh.connect("server.com", "user", "password")
+output = ssh.execute("ls -la")
+say(output)</code></pre>
+
+            <h2 id="subprocess">subprocess - Process Management</h2>
+            <pre><code class="language-mintas">include subprocess
+output = subprocess.run("ls -la")
+say(output)</code></pre>
+
+            <h2 id="sysfiles">sysfiles - File Operations</h2>
+            <pre><code class="language-mintas">include sysfiles
+content = sysfiles.read("file.txt")
+sysfiles.write("output.txt", "Hello!")
+sysfiles.copy("src.txt", "dest.txt")</code></pre>
+
+            <h2 id="timer">timer - Timing & Delays</h2>
+            <pre><code class="language-mintas">include timer
+timer.sleep(1000)  # Sleep 1 second
+start = timer.now()
+# ... code ...
+elapsed = timer.elapsed(start)</code></pre>
+
+            <h2 id="uuid">uuid - UUID Generation</h2>
+            <pre><code class="language-mintas">include uuid
+id = uuid.v4()
+say(id)  # "550e8400-e29b-41d4-a716-446655440000"</code></pre>
+
+            <h2 id="validate">validate - Validation</h2>
+            <pre><code class="language-mintas">include validate
+say(validate.email("test@example.com"))  # true
+say(validate.url("https://example.com"))  # true
+say(validate.phone("+1234567890"))       # true</code></pre>
+
+            <h2 id="webhook">webhook - Webhooks</h2>
+            <pre><code class="language-mintas">include webhook
+webhook.send("https://hooks.example.com", {
+    "event": "user_signup",
+    "data": {"user": "alice"}
+})</code></pre>
+
+            <h2 id="worker">worker - Worker Threads</h2>
+            <pre><code class="language-mintas">include worker
+w = worker.create(fn():
+    return heavy_computation()
+end)
+worker.start(w)
+result = worker.join(w)</code></pre>
+
+            <h2 id="xdbx">xdbx - Build System</h2>
+            <pre><code class="language-mintas"># Command line usage
+mintas xdbx build --exe
+mintas xdbx build --wasm
+mintas xdbx run
+mintas xdbx test</code></pre>
+
+        </main>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+</body>
+
+</html>

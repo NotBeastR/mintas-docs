@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protocols - Mintas</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+    <div class="layout">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="brand">
+                <span>Mintas</span>
+            </div>
+
+            <div class="nav">
+                <a href="../index.html">Overview</a>
+                <div class="nav-header">Standard Library</div>
+                <a href="index.html">All Modules</a>
+                <a href="math.html">Math</a>
+                <a href="files.html">SysFiles</a>
+                <a href="datetime.html">DateTime</a>
+                <a href="json.html">JSON</a>
+                <a href="database.html">Database</a>
+                <a href="canvas.html">Canvas</a>
+                <a href="dew.html">Dew</a>
+                <a href="networking.html">Networking</a>
+                <a href="security.html">Security</a>
+                <a href="system.html">System</a>
+                <a href="formats.html">Data Formats</a>
+                <a href="protocols.html" class="active">Protocols</a>
+                <a href="utilities.html">Utilities</a>
+                <a href="ai.html">AI</a>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <h1>Protocols</h1>
+            <p>Support for various network protocols including DNS, FTP, MQTT, and SMTP.</p>
+
+            <h2>DNS Module</h2>
+            <p>Domain Name System lookups.</p>
+            <pre><code>include dns</code></pre>
+            <table class="methods-table">
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>lookup(host)</code></td>
+                        <td>Resolves a hostname to IP addresses.</td>
+                        <td><code>dns.lookup("google.com")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>mx(domain)</code></td>
+                        <td>Look up MX records for a domain.</td>
+                        <td><code>dns.mx("gmail.com")</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>FTP Module</h2>
+            <p>File Transfer Protocol client.</p>
+            <pre><code>include ftp</code></pre>
+            <table class="methods-table">
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>connect(cfg)</code></td>
+                        <td>Connects to an FTP server.</td>
+                        <td><code>let conn = ftp.connect({host: "..."})</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>list(conn, [path])</code></td>
+                        <td>Lists files in a directory.</td>
+                        <td><code>ftp.list(conn, "/")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>download(conn, remote, local)</code></td>
+                        <td>Downloads a file.</td>
+                        <td><code>ftp.download(conn, "r.txt", "l.txt")</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>MQTT Module</h2>
+            <p>Message Queuing Telemetry Transport client.</p>
+            <pre><code>include mqtt</code></pre>
+            <table class="methods-table">
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>connect(host, [port])</code></td>
+                        <td>Connects to an MQTT broker.</td>
+                        <td><code>let client = mqtt.connect("localhost")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>publish(client, topic, msg)</code></td>
+                        <td>Publishes a message.</td>
+                        <td><code>mqtt.publish(client, "home/temp", "22")</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>SMTP Module</h2>
+            <p>Simple Mail Transfer Protocol client.</p>
+            <pre><code>include smtp</code></pre>
+            <table class="methods-table">
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>send(cfg)</code></td>
+                        <td>Sends an email.</td>
+                        <td><code>smtp.send({to: "...", body: "..."})</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Ping & Traceroute</h2>
+            <p>Network connectivity utilities.</p>
+            <pre><code>include ping</code></pre>
+            <table class="methods-table">
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>host(host)</code></td>
+                        <td>Pings a host and returns stats.</td>
+                        <td><code>ping.host("8.8.8.8")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>port(host, port)</code></td>
+                        <td>Checks if a port is open.</td>
+                        <td><code>ping.port("localhost", 80)</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>trace(host)</code></td>
+                        <td>Performs a traceroute.</td>
+                        <td><code>ping.trace("google.com")</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Webhook Module</h2>
+            <p>Send and verify webhooks.</p>
+            <pre><code>include webhook</code></pre>
+            <table class="methods-table">
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>send(url, payload)</code></td>
+                        <td>Sends a webhook payload.</td>
+                        <td><code>webhook.send(url, {event: "ping"})</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>verify(body, sig, secret)</code></td>
+                        <td>Verifies a webhook signature.</td>
+                        <td><code>webhook.verify(body, sig, secret)</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>GraphQL Module</h2>
+            <p>GraphQL client and query builder.</p>
+            <pre><code>include graphql</code></pre>
+            <table class="methods-table">
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>query(url, query, [vars])</code></td>
+                        <td>Sends a GraphQL query.</td>
+                        <td><code>graphql.query(url, "{ user { name } }")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>build_query(op, name, fields)</code></td>
+                        <td>Builds a GraphQL query string.</td>
+                        <td><code>graphql.build_query("query", "GetUser", ["id", "name"])</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </main>
+    </div>
+    <script src="../js/main.js"></script>
+</body>
+
+</html>
