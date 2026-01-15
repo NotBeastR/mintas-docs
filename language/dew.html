@@ -246,6 +246,126 @@ let pg = dew.database("postgres://user:pass@localhost/mydb")</code></pre>
                 <li><code>dew.redirect(url)</code>: Standard 302 redirect.</li>
             </ul>
 
+            <h2>11. WebRTC for Real-Time Communication</h2>
+            <p>Mintas includes powerful WebRTC APIs for building peer-to-peer applications with low-latency, high-throughput connections.</p>
+            <pre><code>include dew
+
+# Create a peer connection
+let peer = dew.webrtc_peer({id: "user_123"})
+
+# Generate an offer for connection negotiation
+let offer = dew.webrtc_offer(peer)
+
+# Create an answer to a received offer
+let answer = dew.webrtc_answer(offer)
+
+# Create a data channel for messaging
+let channel = dew.webrtc_datachannel(peer, {
+    label: "chat",
+    ordered: true
+})
+
+# Send data through the channel
+dew.webrtc_send(channel, "Hello WebRTC!")
+
+# Get connection statistics
+let stats = dew.webrtc_stats(peer)</code></pre>
+
+            <p><strong>Typical WebRTC Flow:</strong></p>
+            <ol>
+                <li>Create peer connection on both sides</li>
+                <li>Generate offer on initiator side</li>
+                <li>Exchange offer/answer through signaling server (HTTP or WebSocket)</li>
+                <li>Create data channel for real-time messaging</li>
+                <li>Monitor statistics for connection quality</li>
+            </ol>
+
+            <p>For detailed WebRTC examples and best practices, see the <a href="../guides/webrtc.html">WebRTC Guide</a>.</p>
+
+            <h2>12. Frontend JavaScript Integration</h2>
+            <p>Generate interactive client-side JavaScript directly from Mintas without writing raw JavaScript. Handle events, manipulate the DOM, and validate forms entirely in Mintas code.</p>
+
+            <h3>Event Handlers</h3>
+            <pre><code>include dew
+
+@app.get("/interactive"):
+    return dew.html("
+        &lt;button id='btn'&gt;Click me&lt;/button&gt;
+        &lt;input id='search' placeholder='Type to search'&gt;
+        &lt;form id='form'&gt;
+            &lt;input name='username' data-validate='required|min:3'&gt;
+            &lt;input name='email' data-validate='required|email'&gt;
+            &lt;button type='submit'&gt;Submit&lt;/button&gt;
+        &lt;/form&gt;
+        
+        &lt;script&gt;
+            " + dew.js_onclick("#btn") + "
+            " + dew.js_oninput("#search") + "
+            " + dew.js_onsubmit("#form") + "
+            
+            // Event handlers called when events trigger
+            function mintas_handler_onclick(e) {
+                alert('Button clicked!');
+            }
+            
+            function mintas_handler_oninput(e) {
+                console.log('Searching for: ' + e.target.value);
+            }
+            
+            function mintas_handler_onsubmit(e) {
+                e.preventDefault();
+                console.log('Form submitted');
+            }
+        &lt;/script&gt;
+    ")
+end</code></pre>
+
+            <h3>DOM Manipulation</h3>
+            <pre><code>include dew
+
+# Query elements
+dew.js_query("#myElement")          # Find single element
+dew.js_query_all(".buttons")        # Find all elements
+
+# Set and get attributes
+dew.js_set_attr("#input", "type", "password")
+dew.js_get_attr("#input", "value")
+
+# Manage classes
+dew.js_add_class("#div", "active")
+dew.js_remove_class("#div", "disabled")
+dew.js_set_class("#div", "highlight error")
+
+# Set content
+dew.js_set_html("#container", "&lt;h1&gt;Hello&lt;/h1&gt;")
+dew.js_set_text("#status", "Processing...")
+
+# Show, hide, toggle
+dew.js_show("#modal")
+dew.js_hide("#loading")
+dew.js_toggle("#menu")</code></pre>
+
+            <h3>Form Validation</h3>
+            <pre><code>include dew
+
+# Generate comprehensive form validation
+dew.js_validate_form("#myForm", {
+    "username": "required|min:3|max:20",
+    "email": "required|email",
+    "password": "required|min:8",
+    "age": "required|min:18"
+})
+
+# Supported validation rules:
+# - required: Field must not be empty
+# - email: Must be valid email format
+# - min:N: Minimum N characters
+# - max:N: Maximum N characters</code></pre>
+
+            <p><strong>Available Event Handlers:</strong> js_onclick, js_onchange, js_oninput, js_onsubmit, js_onfocus, js_onblur, js_onkeypress, js_onkeydown, js_onkeyup, js_onmouseover, js_onmouseout, js_onload</p>
+
+            <p>For comprehensive examples and best practices, see the <a href="../guides/frontend-js.html">Frontend JavaScript Guide</a>.</p>
+
         </main>
     </div>
     <script src="../js/main.js"></script>

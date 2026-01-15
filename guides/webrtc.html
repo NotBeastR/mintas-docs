@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebRTC Real-Time Communication - Mintas</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .code-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .feature-card {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .feature-card h3 {
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+
+        .step {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 0.5rem;
+            border-left: 4px solid var(--success-color);
+        }
+
+        .warning {
+            background: rgba(255, 193, 7, 0.1);
+            padding: 1rem;
+            border-left: 4px solid #ffc107;
+            margin: 1rem 0;
+            border-radius: 0.5rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background: var(--bg-secondary);
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background: var(--bg-secondary);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="layout">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="brand">
+                <span>Mintas</span>
+            </div>
+
+            <div class="nav">
+                <a href="../index.html">Overview</a>
+
+                <div class="nav-header">Getting Started</div>
+                <a href="install.html">Installation</a>
+                <a href="quickstart.html">Quick Start</a>
+
+                <div class="nav-header">Web Development</div>
+                <a href="../language/dew.html">Dew Framework</a>
+                <a href="webrtc.html" class="active">WebRTC</a>
+                <a href="frontend-js.html">Frontend JS</a>
+
+                <div class="nav-header">Standard Library</div>
+                <a href="../stdlib/index.html">All Modules</a>
+                <a href="../stdlib/dew.html">Dew Module</a>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <h1>WebRTC: Real-Time Communication in Mintas</h1>
+            <p><strong>WebRTC</strong> (Web Real-Time Communication) is a powerful technology for peer-to-peer
+                communication. Mintas provides a streamlined API for building real-time applications with video, audio,
+                and data channels.</p>
+
+            <h2>Key Features</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>📡 Peer-to-Peer</h3>
+                    <p>Direct communication between browsers without intermediary servers for video/audio streams.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>💬 Data Channels</h3>
+                    <p>Low-latency, high-throughput communication for real-time data exchange.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🔗 Signaling</h3>
+                    <p>Built-in signaling server support for connection establishment and negotiation.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>📊 Statistics</h3>
+                    <p>Comprehensive connection statistics including bandwidth and latency metrics.</p>
+                </div>
+            </div>
+
+            <h2>Core API Overview</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Purpose</th>
+                        <th>Returns</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>dew.webrtc_peer(config)</code></td>
+                        <td>Creates a new peer connection</td>
+                        <td>Peer object</td>
+                    </tr>
+                    <tr>
+                        <td><code>dew.webrtc_offer(peer)</code></td>
+                        <td>Generates an offer for connection</td>
+                        <td>Offer SDP object</td>
+                    </tr>
+                    <tr>
+                        <td><code>dew.webrtc_answer(offer)</code></td>
+                        <td>Creates an answer to an offer</td>
+                        <td>Answer SDP object</td>
+                    </tr>
+                    <tr>
+                        <td><code>dew.webrtc_datachannel(peer, config)</code></td>
+                        <td>Creates a data channel</td>
+                        <td>Data channel object</td>
+                    </tr>
+                    <tr>
+                        <td><code>dew.webrtc_send(channel, data)</code></td>
+                        <td>Sends data through channel</td>
+                        <td>Send result</td>
+                    </tr>
+                    <tr>
+                        <td><code>dew.webrtc_close(peer_or_channel)</code></td>
+                        <td>Closes a connection or channel</td>
+                        <td>Close confirmation</td>
+                    </tr>
+                    <tr>
+                        <td><code>dew.webrtc_stats(peer)</code></td>
+                        <td>Gets connection statistics</td>
+                        <td>Stats object</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Getting Started</h2>
+
+            <h3>1. Create a Peer Connection</h3>
+            <p>Start by creating a new peer connection with optional configuration:</p>
+            <div class="code-block"><pre><code>include dew
+
+# Create a peer with custom ID
+let peer = dew.webrtc_peer({
+    id: "user_123",
+    config: {
+        iceServers: [
+            {urls: ["stun:stun.l.google.com:19302"]}
+        ]
+    }
+})</code></pre></div>
+
+            <h3>2. Generate an Offer</h3>
+            <p>Once you have a peer, generate an offer to initiate connection:</p>
+            <div class="code-block"><pre><code>let offer = dew.webrtc_offer(peer)
+
+# Offer contains:
+# - type: "offer"
+# - peer_id: "user_123"
+# - sdp: Session Description Protocol
+# - timestamp: Creation time</code></pre></div>
+
+            <h3>3. Exchange Offers and Answers</h3>
+            <p>Send the offer through your signaling server to the remote peer:</p>
+            <div class="code-block"><pre><code>@app.post("/signal/offer"):
+    let offer = getback.json()
+    # Send offer to remote peer through WebSocket or HTTP
+    dew.ws_broadcast("signal:" + offer.peer_id, offer)
+    return dew.json({status: "received"})
+end
+
+# Remote peer receives and creates answer
+@app.post("/signal/answer"):
+    let answer = dew.webrtc_answer(offer)
+    # Send answer back to originator
+    dew.ws_broadcast("signal:" + answer.peer_id, answer)
+    return dew.json({status: "answered"})
+end</code></pre></div>
+
+            <h3>4. Create Data Channels</h3>
+            <p>Data channels enable low-latency messaging between peers:</p>
+            <div class="code-block"><pre><code>let dc = dew.webrtc_datachannel(peer, {
+    label: "chat",
+    ordered: true,
+    maxRetransmits: 3
+})</code></pre></div>
+
+            <h3>5. Send and Receive Data</h3>
+            <p>Exchange messages through data channels:</p>
+            <div class="code-block"><pre><code># Send a message
+let result = dew.webrtc_send(dc, "Hello from Mintas!")
+
+# Register message handler
+dew.webrtc_on_message(dc, fn(event) {
+    say("Received: " + event.data)
+})</code></pre></div>
+
+            <h2>Complete Example: Real-Time Chat</h2>
+
+            <div class="step">
+                <h4>Backend Server Setup</h4>
+                <div class="code-block"><pre><code>include dew
+
+let app = dew.main()
+
+# Store active peers
+let peers = {}
+
+# Signaling endpoint
+@app.post("/signal"):
+    let signal = getback.json()
+    let peer_id = signal.peer_id
+    
+    if signal.type == "offer" then
+        # Forward offer to peer
+        dew.ws_broadcast("signal:" + peer_id, signal)
+    elseif signal.type == "answer" then
+        # Forward answer back
+        dew.ws_broadcast("signal:" + peer_id, signal)
+    end
+    
+    return dew.json({status: "signaled"})
+end
+
+# WebSocket for real-time messaging
+@app.websocket("/chat"):
+    let peer_id = getback.query("peer_id")
+    peers[peer_id] = true
+end
+
+@app.ws_on_message:
+    let msg = getback.text()
+    dew.ws_broadcast("message", {
+        from: getback.query("peer_id"),
+        data: msg,
+        timestamp: now()
+    })
+end
+
+dew.serve(app)</code></pre></div>
+            </div>
+
+            <div class="step">
+                <h4>Frontend JavaScript Integration</h4>
+                <div class="code-block"><pre><code>// HTML setup
+&lt;video id="localVideo" autoplay muted playsinline&gt;&lt;/video&gt;
+&lt;video id="remoteVideo" autoplay playsinline&gt;&lt;/video&gt;
+&lt;input id="messageInput" type="text" placeholder="Type a message"&gt;
+&lt;button onclick="sendMessage()"&gt;Send&lt;/button&gt;
+&lt;div id="chatLog"&gt;&lt;/div&gt;
+
+// JavaScript for WebRTC
+const config = {
+    iceServers: [{urls: ['stun:stun.l.google.com:19302']}]
+};
+
+let localPeer = new RTCPeerConnection(config);
+let dataChannel = localPeer.createDataChannel("chat");
+
+// Setup media stream
+navigator.mediaDevices.getUserMedia({
+    audio: true,
+    video: {width: 320, height: 240}
+}).then(stream => {
+    document.getElementById('localVideo').srcObject = stream;
+    stream.getTracks().forEach(track => {
+        localPeer.addTrack(track, stream);
+    });
+});
+
+// Handle data channel
+dataChannel.onmessage = (event) => {
+    const log = document.getElementById('chatLog');
+    log.innerHTML += '&lt;p&gt;Peer: ' + event.data + '&lt;/p&gt;';
+};
+
+function sendMessage() {
+    const input = document.getElementById('messageInput');
+    dataChannel.send(input.value);
+    input.value = '';
+}</code></pre></div>
+            </div>
+
+            <h2>Connection Statistics</h2>
+            <p>Monitor connection quality with real-time statistics:</p>
+            <div class="code-block"><pre><code>let stats = dew.webrtc_stats(peer)
+
+# Available metrics:
+# - bytes_sent: Bytes transmitted
+# - bytes_received: Bytes received
+# - packets_lost: Lost packet count
+# - jitter: Network jitter in ms
+# - round_trip_time: RTT in ms
+# - available_outgoing_bitrate: Current upload speed
+# - available_incoming_bitrate: Current download speed</code></pre></div>
+
+            <h2>Best Practices</h2>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>Error Handling</h3>
+                    <p>Always handle connection failures and provide fallback mechanisms for users with connectivity
+                        issues.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Performance</h3>
+                    <p>Monitor statistics regularly and adjust quality settings based on available bandwidth.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Security</h3>
+                    <p>Use DTLS for data channel encryption and validate all signaling messages server-side.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Scalability</h3>
+                    <p>For group calls, consider using SFU (Selective Forwarding Unit) or MCU (Multipoint Control Unit)
+                        architectures.</p>
+                </div>
+            </div>
+
+            <div class="warning">
+                <strong>⚠️ Important:</strong> WebRTC requires HTTPS in production. Self-signed certificates are
+                accepted for localhost testing only.
+            </div>
+
+            <h2>Common Use Cases</h2>
+
+            <h3>Video Conferencing</h3>
+            <p>Build multi-user video calls with screen sharing and recording capabilities.</p>
+
+            <h3>Real-Time Gaming</h3>
+            <p>Low-latency data channels perfect for multiplayer game state synchronization.</p>
+
+            <h3>Collaborative Tools</h3>
+            <p>Real-time document editing, whiteboarding, and concurrent development environments.</p>
+
+            <h3>Live Streaming</h3>
+            <p>Low-latency streaming with viewer interaction through data channels.</p>
+
+            <h2>Troubleshooting</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Issue</th>
+                        <th>Cause</th>
+                        <th>Solution</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Peers cannot connect</td>
+                        <td>ICE gathering failure or NAT traversal issues</td>
+                        <td>Add multiple STUN/TURN servers in config</td>
+                    </tr>
+                    <tr>
+                        <td>No audio/video streams</td>
+                        <td>getUserMedia permissions denied</td>
+                        <td>Ensure HTTPS and user granted media permissions</td>
+                    </tr>
+                    <tr>
+                        <td>High latency</td>
+                        <td>Network congestion or poor quality</td>
+                        <td>Monitor stats and adapt quality settings</td>
+                    </tr>
+                    <tr>
+                        <td>Data channel stuck connecting</td>
+                        <td>Firewall blocking P2P connection</td>
+                        <td>Configure TURN server with relay candidate</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </main>
+    </div>
+    <script src="../js/main.js"></script>
+</body>
+
+</html>

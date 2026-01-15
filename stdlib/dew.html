@@ -6,6 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dew Framework - Mintas</title>
     <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .section-divider {
+            border-top: 2px solid var(--border-color);
+            margin: 2.5rem 0 1.5rem 0;
+            padding-top: 1.5rem;
+        }
+
+        .new-badge {
+            display: inline-block;
+            background: var(--success-color);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+    </style>
 </head>
 
 <body>
@@ -18,6 +36,15 @@
 
             <div class="nav">
                 <a href="../index.html">Overview</a>
+
+                <div class="nav-header">Getting Started</div>
+                <a href="../guides/install.html">Installation</a>
+                <a href="../guides/quickstart.html">Quick Start</a>
+
+                <div class="nav-header">Web Development</div>
+                <a href="../language/dew.html">Dew Framework</a>
+                <a href="../guides/webrtc.html">WebRTC Guide</a>
+                <a href="../guides/frontend-js.html">Frontend JS</a>
 
                 <div class="nav-header">Standard Library</div>
                 <a href="index.html">All Modules</a>
@@ -40,12 +67,19 @@
 
         <!-- Main Content -->
         <main class="main-content">
-            <h1>Dew Web Framework</h1>
-            <p>The <code>dew</code> module is a powerful, integrated web server and framework for Mintas. It supports
-                routing, middleware, templates, static file serving, and databases.</p>
+            <h1>Dew Web Framework - Complete API Reference</h1>
+            <p>The <code>dew</code> module is a comprehensive, production-ready web framework for Mintas. It includes routing, middleware, WebRTC, JavaScript integration, databases, and advanced styling for modern web development.</p>
 
-            <h2>Importing</h2>
-            <pre><code>include dew</code></pre>
+            <h2>Quick Start</h2>
+            <pre><code>include dew
+
+let app = dew.create_server({port: 3000})
+
+@app.get("/"):
+    return dew.text("Hello from Mintas!")
+end
+
+dew.serve(app)</code></pre>
 
             <h2>Server Lifecycle</h2>
             <table class="methods-table">
@@ -60,11 +94,11 @@
                     <tr>
                         <td><code>create_server(options)</code></td>
                         <td>Creates a new server configuration. Options: port, host, debug.</td>
-                        <td><code>let app = dew.create_server({port: 3000, debug: true})</code></td>
+                        <td><code>let app = dew.create_server({port: 3000})</code></td>
                     </tr>
                     <tr>
                         <td><code>serve(server)</code></td>
-                        <td>Starts the server. This function blocks.</td>
+                        <td>Starts the server and blocks. Listening on configured port.</td>
                         <td><code>dew.serve(app)</code></td>
                     </tr>
                 </tbody>
@@ -84,12 +118,22 @@
                     <tr>
                         <td><code>get(path, handler)</code></td>
                         <td>Registers a GET route.</td>
-                        <td><code>app.get("/", fn(req) { return dew.text("Hello") })</code></td>
+                        <td><code>@app.get("/") ... end</code></td>
                     </tr>
                     <tr>
                         <td><code>post(path, handler)</code></td>
                         <td>Registers a POST route.</td>
-                        <td><code>app.post("/submit", fn(req) { ... })</code></td>
+                        <td><code>@app.post("/submit") ... end</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>put(path, handler)</code></td>
+                        <td>Registers a PUT route.</td>
+                        <td><code>@app.put("/update") ... end</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>delete(path, handler)</code></td>
+                        <td>Registers a DELETE route.</td>
+                        <td><code>@app.delete("/remove") ... end</code></td>
                     </tr>
                     <tr>
                         <td><code>static(url, dir)</code></td>
@@ -99,19 +143,22 @@
                     <tr>
                         <td><code>use(handler)</code></td>
                         <td>Registers middleware that runs for every request.</td>
-                        <td><code>app.use(logger_middleware)</code></td>
+                        <td><code>app.use(middleware)</code></td>
                     </tr>
                 </tbody>
             </table>
 
-            <h2>Request Object</h2>
+            <h2>Request Object (getback)</h2>
             <p>The handler function receives a request object (often called `req` or `getback`).</p>
             <ul>
-                <li><code>req.body</code> - Raw body string.</li>
-                <li><code>req.json</code> - Parsed JSON object (if content-type is json).</li>
-                <li><code>req.query</code> - Table of query parameters.</li>
-                <li><code>req.params</code> - Table of URL parameters (e.g. /user/:id).</li>
-                <li><code>req.headers</code> - Table of request headers.</li>
+                <li><code>req.body</code> - Raw request body as string.</li>
+                <li><code>req.json()</code> - Parsed JSON body as a table.</li>
+                <li><code>req.query(key)</code> - Get URL query parameter value.</li>
+                <li><code>req.param(key)</code> - Get dynamic path parameter.</li>
+                <li><code>req.header(key)</code> - Get request header value.</li>
+                <li><code>req.method</code> - HTTP method: GET, POST, PUT, DELETE, etc.</li>
+                <li><code>req.path</code> - The requested route path.</li>
+                <li><code>req.ip</code> - Client's IP address.</li>
             </ul>
 
             <h2>Response Helpers</h2>
@@ -127,32 +174,32 @@
                     <tr>
                         <td><code>text(str, status)</code></td>
                         <td>Returns a plain text response.</td>
-                        <td><code>return dew.text("OK", 200)</code></td>
+                        <td><code>return dew.text("OK")</code></td>
                     </tr>
                     <tr>
                         <td><code>json(obj, status)</code></td>
                         <td>Returns a JSON response.</td>
-                        <td><code>return dew.json({msg: "Hi"}, 200)</code></td>
+                        <td><code>return dew.json({msg: "Hi"})</code></td>
                     </tr>
                     <tr>
                         <td><code>html(str, status)</code></td>
                         <td>Returns an HTML response.</td>
-                        <td><code>return dew.html("<h1>Hi</h1>", 200)</code></td>
+                        <td><code>return dew.html("<h1>Hi</h1>")</code></td>
                     </tr>
                     <tr>
                         <td><code>file(path)</code></td>
-                        <td>Returns a file download.</td>
+                        <td>Returns a file for download.</td>
                         <td><code>return dew.file("./report.pdf")</code></td>
                     </tr>
                     <tr>
                         <td><code>redirect(url)</code></td>
-                        <td>Redirects to another URL.</td>
+                        <td>Returns a 302 redirect response.</td>
                         <td><code>return dew.redirect("/login")</code></td>
                     </tr>
                 </tbody>
             </table>
 
-            <h2>Database & Magic</h2>
+            <h2>Database & Authentication</h2>
             <table class="methods-table">
                 <thead>
                     <tr>
@@ -184,6 +231,240 @@
                     </tr>
                 </tbody>
             </table>
+
+            <div class="section-divider">
+                <h2>WebRTC for Real-Time Communication <span class="new-badge">NEW</span></h2>
+            </div>
+            <p>Build peer-to-peer applications with low-latency connections. Perfect for video calls, gaming, collaborative tools, and live streaming.</p>
+
+            <h3>Core WebRTC Functions</h3>
+            <table class="methods-table">
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Purpose</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>webrtc_peer(config)</code></td>
+                        <td>Creates a new WebRTC peer connection</td>
+                        <td><code>let peer = dew.webrtc_peer({id: "user1"})</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>webrtc_offer(peer)</code></td>
+                        <td>Generates an SDP offer for connection initiation</td>
+                        <td><code>let offer = dew.webrtc_offer(peer)</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>webrtc_answer(offer)</code></td>
+                        <td>Creates an SDP answer to a received offer</td>
+                        <td><code>let answer = dew.webrtc_answer(offer)</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>webrtc_datachannel(peer, config)</code></td>
+                        <td>Creates a bidirectional data channel</td>
+                        <td><code>let dc = dew.webrtc_datachannel(peer, {label: "chat"})</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>webrtc_send(channel, data)</code></td>
+                        <td>Sends data through a data channel</td>
+                        <td><code>dew.webrtc_send(dc, "Hello!")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>webrtc_on_message(channel, handler)</code></td>
+                        <td>Registers a message handler</td>
+                        <td><code>dew.webrtc_on_message(dc, handler)</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>webrtc_close(peer_or_channel)</code></td>
+                        <td>Closes a peer connection or data channel</td>
+                        <td><code>dew.webrtc_close(peer)</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>webrtc_stats(peer)</code></td>
+                        <td>Gets real-time connection statistics</td>
+                        <td><code>let stats = dew.webrtc_stats(peer)</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p><strong>See the <a href="../guides/webrtc.html">complete WebRTC guide</a> for real-world examples and best practices.</strong></p>
+
+            <div class="section-divider">
+                <h2>Frontend JavaScript Integration <span class="new-badge">NEW</span></h2>
+            </div>
+            <p>Generate interactive client-side JavaScript from Mintas. Handle events, manipulate the DOM, and validate forms without writing raw JavaScript.</p>
+
+            <h3>Event Handlers (12 types)</h3>
+            <p>All event handlers use event delegation for optimal performance with dynamic content.</p>
+            <table class="methods-table">
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Triggers On</th>
+                        <th>Use For</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>js_onclick(selector)</code></td>
+                        <td>Element clicked</td>
+                        <td>Button clicks, link interactions</td>
+                    </tr>
+                    <tr>
+                        <td><code>js_onchange(selector)</code></td>
+                        <td>Form field value changes</td>
+                        <td>Select, radio, checkbox changes</td>
+                    </tr>
+                    <tr>
+                        <td><code>js_oninput(selector)</code></td>
+                        <td>User types in input</td>
+                        <td>Real-time search, autocomplete</td>
+                    </tr>
+                    <tr>
+                        <td><code>js_onsubmit(selector)</code></td>
+                        <td>Form submitted</td>
+                        <td>Form data processing</td>
+                    </tr>
+                    <tr>
+                        <td><code>js_onfocus(selector)</code></td>
+                        <td>Input gains focus</td>
+                        <td>Show hints, load data</td>
+                    </tr>
+                    <tr>
+                        <td><code>js_onblur(selector)</code></td>
+                        <td>Input loses focus</td>
+                        <td>Validation, save drafts</td>
+                    </tr>
+                    <tr>
+                        <td><code>js_onkeypress(selector)</code></td>
+                        <td>Key pressed in input</td>
+                        <td>Submit on Enter, validation</td>
+                    </tr>
+                    <tr>
+                        <td><code>js_onkeydown(selector)</code></td>
+                        <td>Key pressed down</td>
+                        <td>Keyboard shortcuts</td>
+                    </tr>
+                    <tr>
+                        <td><code>js_onkeyup(selector)</code></td>
+                        <td>Key released</td>
+                        <td>Post-keystroke processing</td>
+                    </tr>
+                    <tr>
+                        <td><code>js_onmouseover(selector)</code></td>
+                        <td>Mouse enters element</td>
+                        <td>Hover effects, tooltips</td>
+                    </tr>
+                    <tr>
+                        <td><code>js_onmouseout(selector)</code></td>
+                        <td>Mouse leaves element</td>
+                        <td>Cleanup hover states</td>
+                    </tr>
+                    <tr>
+                        <td><code>js_onload()</code></td>
+                        <td>Page fully loaded</td>
+                        <td>Initialize components</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>DOM Query & Manipulation (13 functions)</h3>
+            <table class="methods-table">
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Purpose</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>js_query(selector)</code></td>
+                        <td>Find first matching element</td>
+                        <td><code>dew.js_query("#myButton")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>js_query_all(selector)</code></td>
+                        <td>Find all matching elements</td>
+                        <td><code>dew.js_query_all(".button")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>js_set_attr(selector, attr, value)</code></td>
+                        <td>Set HTML attribute</td>
+                        <td><code>dew.js_set_attr("button", "disabled", "true")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>js_get_attr(selector, attr)</code></td>
+                        <td>Get HTML attribute value</td>
+                        <td><code>dew.js_get_attr("input", "value")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>js_set_class(selector, className)</code></td>
+                        <td>Replace all classes</td>
+                        <td><code>dew.js_set_class("div", "active")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>js_add_class(selector, className)</code></td>
+                        <td>Add a CSS class</td>
+                        <td><code>dew.js_add_class("div", "highlight")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>js_remove_class(selector, className)</code></td>
+                        <td>Remove a CSS class</td>
+                        <td><code>dew.js_remove_class("div", "disabled")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>js_set_html(selector, html)</code></td>
+                        <td>Set element inner HTML</td>
+                        <td><code>dew.js_set_html("#status", "<p>Ready</p>")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>js_set_text(selector, text)</code></td>
+                        <td>Set element text content (safe)</td>
+                        <td><code>dew.js_set_text("#label", "Processing...")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>js_show(selector)</code></td>
+                        <td>Display element</td>
+                        <td><code>dew.js_show("#modal")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>js_hide(selector)</code></td>
+                        <td>Hide element</td>
+                        <td><code>dew.js_hide("#loading")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>js_toggle(selector)</code></td>
+                        <td>Toggle visibility</td>
+                        <td><code>dew.js_toggle("#menu")</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Form Validation</h3>
+            <pre><code>dew.js_validate_form("#myForm", {
+    "username": "required|min:3|max:20",
+    "email": "required|email",
+    "password": "required|min:8"
+})</code></pre>
+            <p><strong>Rules:</strong> required, email, min:N, max:N</p>
+
+            <p><strong>See the <a href="../guides/frontend-js.html">complete JavaScript guide</a> for examples and best practices.</strong></p>
+
+            <h2>Additional Features</h2>
+            <ul>
+                <li>WebSocket support with rooms and broadcasting</li>
+                <li>Session management and cookies</li>
+                <li>File uploads with chunking</li>
+                <li>CSRF protection and sanitization</li>
+                <li>Rate limiting middleware</li>
+                <li>Background jobs and task scheduling</li>
+                <li>50+ advanced CSS styling properties</li>
+                <li>Type-safe C/Rust FFI integration</li>
+            </ul>
 
         </main>
     </div>

@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frontend JavaScript Handling - Mintas</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .code-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            margin: 1rem 0;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .feature-card {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .feature-card h3 {
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+
+        .example {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 0.5rem;
+            border-left: 4px solid var(--success-color);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background: var(--bg-secondary);
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background: var(--bg-secondary);
+        }
+
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .comparison-item {
+            background: var(--bg-secondary);
+            padding: 1rem;
+            border-radius: 0.5rem;
+        }
+
+        .comparison-item h4 {
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="layout">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="brand">
+                <span>Mintas</span>
+            </div>
+
+            <div class="nav">
+                <a href="../index.html">Overview</a>
+
+                <div class="nav-header">Getting Started</div>
+                <a href="install.html">Installation</a>
+                <a href="quickstart.html">Quick Start</a>
+
+                <div class="nav-header">Web Development</div>
+                <a href="../language/dew.html">Dew Framework</a>
+                <a href="webrtc.html">WebRTC</a>
+                <a href="frontend-js.html" class="active">Frontend JS</a>
+
+                <div class="nav-header">Standard Library</div>
+                <a href="../stdlib/index.html">All Modules</a>
+                <a href="../stdlib/dew.html">Dew Module</a>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <h1>Frontend JavaScript Handling in Mintas DEW</h1>
+            <p>Mintas provides powerful utilities for generating and managing client-side JavaScript directly from Mintas
+                code. Create interactive UIs, handle events, and manipulate the DOM without writing raw JavaScript.</p>
+
+            <h2>Why JavaScript Handling in Mintas?</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>🔗 Type-Safe</h3>
+                    <p>Define event handlers and DOM operations in Mintas with full type checking.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>⚡ Performance</h3>
+                    <p>Optimized event delegation and efficient DOM manipulation code generation.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🛡️ Security</h3>
+                    <p>Built-in protection against XSS and injection attacks.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>🎯 Focus</h3>
+                    <p>Stay in Mintas - no context switching between languages.</p>
+                </div>
+            </div>
+
+            <h2>Event Handling Functions</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Triggers On</th>
+                        <th>Use Case</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>dew.js_onclick(selector)</code></td>
+                        <td>Element clicked</td>
+                        <td>Button clicks, link interactions</td>
+                    </tr>
+                    <tr>
+                        <td><code>dew.js_onchange(selector)</code></td>
+                        <td>Form field value changes</td>
+                        <td>Select, radio, checkbox changes</td>
+                    </tr>
+                    <tr>
+                        <td><code>dew.js_oninput(selector)</code></td>
+                        <td>User types in input</td>
+                        <td>Real-time search, autocomplete</td>
+                    </tr>
+                    <tr>
+                        <td><code>dew.js_onsubmit(selector)</code></td>
+                        <td>Form submission</td>
+                        <td>Form data processing</td>
+                    </tr>
+                    <tr>
+                        <td><code>dew.js_onfocus(selector)</code></td>
+                        <td>Input gains focus</td>
+                        <td>Show hints, load related data</td>
+                    </tr>
+                    <tr>
+                        <td><code>dew.js_onblur(selector)</code></td>
+                        <td>Input loses focus</td>
+                        <td>Validation, save drafts</td>
+                    </tr>
+                    <tr>
+                        <td><code>dew.js_onkeypress(selector)</code></td>
+                        <td>Key pressed in input</td>
+                        <td>Enter to submit, char validation</td>
+                    </tr>
+                    <tr>
+                        <td><code>dew.js_onkeydown(selector)</code></td>
+                        <td>Key pressed down</td>
+                        <td>Keyboard shortcuts</td>
+                    </tr>
+                    <tr>
+                        <td><code>dew.js_onkeyup(selector)</code></td>
+                        <td>Key released</td>
+                        <td>Post-keystroke processing</td>
+                    </tr>
+                    <tr>
+                        <td><code>dew.js_onmouseover(selector)</code></td>
+                        <td>Mouse enters element</td>
+                        <td>Hover effects, tooltips</td>
+                    </tr>
+                    <tr>
+                        <td><code>dew.js_onmouseout(selector)</code></td>
+                        <td>Mouse leaves element</td>
+                        <td>Cleanup hover states</td>
+                    </tr>
+                    <tr>
+                        <td><code>dew.js_onload()</code></td>
+                        <td>Page fully loaded</td>
+                        <td>Initialize components</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>DOM Query & Manipulation</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Purpose</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>dew.js_query(selector)</code></td>
+                        <td>Find single element</td>
+                        <td><code>dew.js_query("#myButton")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>dew.js_query_all(selector)</code></td>
+                        <td>Find all matching elements</td>
+                        <td><code>dew.js_query_all(".button")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>dew.js_set_attr(selector, attr, value)</code></td>
+                        <td>Set HTML attribute</td>
+                        <td><code>dew.js_set_attr("button", "disabled", "true")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>dew.js_get_attr(selector, attr)</code></td>
+                        <td>Read HTML attribute</td>
+                        <td><code>dew.js_get_attr("input", "value")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>dew.js_set_class(selector, className)</code></td>
+                        <td>Replace classes</td>
+                        <td><code>dew.js_set_class("div", "active")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>dew.js_add_class(selector, className)</code></td>
+                        <td>Add a CSS class</td>
+                        <td><code>dew.js_add_class("div", "highlight")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>dew.js_remove_class(selector, className)</code></td>
+                        <td>Remove a CSS class</td>
+                        <td><code>dew.js_remove_class("div", "disabled")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>dew.js_set_html(selector, html)</code></td>
+                        <td>Set element content (HTML)</td>
+                        <td><code>dew.js_set_html("#status", "&lt;p&gt;Ready&lt;/p&gt;")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>dew.js_set_text(selector, text)</code></td>
+                        <td>Set element content (text)</td>
+                        <td><code>dew.js_set_text("#label", "Processing...")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>dew.js_show(selector)</code></td>
+                        <td>Display element</td>
+                        <td><code>dew.js_show("#modal")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>dew.js_hide(selector)</code></td>
+                        <td>Hide element</td>
+                        <td><code>dew.js_hide("#loading")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>dew.js_toggle(selector)</code></td>
+                        <td>Toggle visibility</td>
+                        <td><code>dew.js_toggle("#menu")</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Form Validation</h2>
+            <p>Create comprehensive client-side form validation with validation rules:</p>
+            <div class="code-block"><pre><code>dew.js_validate_form("form", {
+    "username": "required|min:3|max:20",
+    "email": "required|email",
+    "password": "required|min:8",
+    "age": "required|min:18"
+})</code></pre></div>
+
+            <p><strong>Supported Validation Rules:</strong></p>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>Basic Rules</h4>
+                    <ul>
+                        <li><code>required</code> - Field must not be empty</li>
+                        <li><code>email</code> - Must be valid email format</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <h4>Length Rules</h4>
+                    <ul>
+                        <li><code>min:N</code> - Minimum N characters</li>
+                        <li><code>max:N</code> - Maximum N characters</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h2>Practical Examples</h2>
+
+            <h3>Example 1: Click Counter</h3>
+            <div class="example">
+                <div class="code-block"><pre><code>include dew
+
+@app.get("/"):
+    return dew.html("
+        &lt;button id='counter'&gt;Clicked 0 times&lt;/button&gt;
+        &lt;script&gt;
+            let count = 0;
+            " + dew.js_onclick("#counter") + "
+            
+            function mintas_handler_onclick(e) {
+                count++;
+                e.target.textContent = 'Clicked ' + count + ' times';
+            }
+        &lt;/script&gt;
+    ")
+end</code></pre></div>
+            </div>
+
+            <h3>Example 2: Real-Time Search</h3>
+            <div class="example">
+                <div class="code-block"><pre><code>include dew
+
+@app.get("/search"):
+    return dew.html("
+        &lt;input id='searchbox' type='text' placeholder='Search...'&gt;
+        &lt;div id='results'&gt;&lt;/div&gt;
+        &lt;script&gt;
+            " + dew.js_oninput("#searchbox") + "
+            
+            function mintas_handler_oninput(e) {
+                const query = e.target.value;
+                fetch('/api/search?q=' + encodeURIComponent(query))
+                    .then(r => r.json())
+                    .then(data => {
+                        let html = '';
+                        data.forEach(item => {
+                            html += '&lt;div&gt;' + item.name + '&lt;/div&gt;';
+                        });
+                        document.getElementById('results').innerHTML = html;
+                    });
+            }
+        &lt;/script&gt;
+    ")
+end
+
+@app.get("/api/search"):
+    let q = getback.query("q")
+    let results = [{name: "Result 1"}, {name: "Result 2"}]
+    return dew.json(results)
+end</code></pre></div>
+            </div>
+
+            <h3>Example 3: Form Validation</h3>
+            <div class="example">
+                <div class="code-block"><pre><code>include dew
+
+@app.get("/register"):
+    return dew.html("
+        &lt;form id='registerForm'&gt;
+            &lt;input name='username' type='text' data-validate='required|min:3'&gt;
+            &lt;input name='email' type='email' data-validate='required|email'&gt;
+            &lt;input name='password' type='password' data-validate='required|min:8'&gt;
+            &lt;button type='submit'&gt;Register&lt;/button&gt;
+        &lt;/form&gt;
+        &lt;div id='errors'&gt;&lt;/div&gt;
+        &lt;script&gt;
+            " + dew.js_validate_form("#registerForm") + "
+            
+            function mintas_handler_validation_error(errors) {
+                const errorDiv = document.getElementById('errors');
+                errorDiv.innerHTML = '&lt;ul&gt;' +
+                    errors.map(e => '&lt;li&gt;' + e + '&lt;/li&gt;').join('') +
+                    '&lt;/ul&gt;';
+            }
+        &lt;/script&gt;
+    ")
+end</code></pre></div>
+            </div>
+
+            <h3>Example 4: Toggle Modal</h3>
+            <div class="example">
+                <div class="code-block"><pre><code>include dew
+
+@app.get("/modal-demo"):
+    return dew.html("
+        &lt;button id='openBtn'&gt;Open Modal&lt;/button&gt;
+        
+        &lt;div id='modal' style='display:none'&gt;
+            &lt;h2&gt;Modal Content&lt;/h2&gt;
+            &lt;p&gt;This is a modal dialog&lt;/p&gt;
+            &lt;button id='closeBtn'&gt;Close&lt;/button&gt;
+        &lt;/div&gt;
+        
+        &lt;script&gt;
+            " + dew.js_onclick("#openBtn") + "
+            " + dew.js_onclick("#closeBtn") + "
+            
+            function mintas_handler_onclick(e) {
+                if (e.target.id === 'openBtn') {
+                    " + dew.js_show("#modal") + ";
+                } else if (e.target.id === 'closeBtn') {
+                    " + dew.js_hide("#modal") + ";
+                }
+            }
+        &lt;/script&gt;
+    ")
+end</code></pre></div>
+            </div>
+
+            <h3>Example 5: Dynamic Class Toggle</h3>
+            <div class="example">
+                <div class="code-block"><pre><code>include dew
+
+@app.get("/theme-switcher"):
+    return dew.html("
+        &lt;style&gt;
+            body { background: white; color: black; }
+            body.dark-mode { background: #1e1e1e; color: white; }
+        &lt;/style&gt;
+        
+        &lt;button id='themeBtn'&gt;Toggle Dark Mode&lt;/button&gt;
+        
+        &lt;script&gt;
+            " + dew.js_onclick("#themeBtn") + "
+            
+            function mintas_handler_onclick(e) {
+                const body = document.body;
+                if (body.classList.contains('dark-mode')) {
+                    " + dew.js_remove_class("body", "dark-mode") + ";
+                } else {
+                    " + dew.js_add_class("body", "dark-mode") + ";
+                }
+            }
+        &lt;/script&gt;
+    ")
+end</code></pre></div>
+            </div>
+
+            <h2>Event Delegation</h2>
+            <p>All event handlers use event delegation for optimal performance with dynamic content:</p>
+            <div class="code-block"><pre><code>// Single handler manages all button clicks, even dynamically added ones
+" + dew.js_onclick("button") + "
+
+// This works for buttons added via dew.js_set_html too
+function addNewButton() {
+    let html = document.getElementById('container').innerHTML;
+    html += '&lt;button&gt;New Button&lt;/button&gt;';
+    document.getElementById('container').innerHTML = html;
+    // New button automatically gets the click handler!
+}</code></pre></div>
+
+            <h2>Security Considerations</h2>
+
+            <div class="comparison">
+                <div class="comparison-item">
+                    <h4>✅ Safe: js_set_text</h4>
+                    <p>Use for user-generated content</p>
+                    <code>dew.js_set_text("#msg", userInput)</code>
+                </div>
+                <div class="comparison-item">
+                    <h4>⚠️ Unsafe: js_set_html</h4>
+                    <p>Only use with trusted content</p>
+                    <code>dew.js_set_html("#msg", "<b>Bold</b>")</code>
+                </div>
+            </div>
+
+            <h2>Performance Tips</h2>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>Use Event Delegation</h3>
+                    <p>Attach handlers to parent containers, not individual elements.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Batch DOM Updates</h3>
+                    <p>Combine multiple js_set_* calls into single HTML update when possible.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Debounce Input Events</h3>
+                    <p>For high-frequency events like oninput, debounce API calls in handler.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Use CSS Classes</h3>
+                    <p>Prefer adding/removing classes over inline style changes.</p>
+                </div>
+            </div>
+
+            <h2>Combining with WebRTC</h2>
+            <p>Use JavaScript handling with WebRTC for rich interactive applications:</p>
+            <div class="code-block"><pre><code>include dew
+
+@app.get("/video-chat"):
+    return dew.html("
+        &lt;video id='localVideo' autoplay muted&gt;&lt;/video&gt;
+        &lt;video id='remoteVideo' autoplay&gt;&lt;/video&gt;
+        &lt;button id='startBtn'&gt;Start Call&lt;/button&gt;
+        &lt;button id='endBtn'&gt;End Call&lt;/button&gt;
+        
+        &lt;script&gt;
+            " + dew.js_onclick("#startBtn") + "
+            " + dew.js_onclick("#endBtn") + "
+            
+            let localPeer = null;
+            
+            function mintas_handler_onclick(e) {
+                if (e.target.id === 'startBtn') {
+                    localPeer = new RTCPeerConnection();
+                    // Setup video call
+                } else if (e.target.id === 'endBtn') {
+                    localPeer.close();
+                    " + dew.js_hide("#remoteVideo") + ";
+                }
+            }
+        &lt;/script&gt;
+    ")
+end</code></pre></div>
+
+            <h2>Next Steps</h2>
+            <ul>
+                <li>Combine JavaScript handling with <a href="webrtc.html">WebRTC</a> for real-time apps</li>
+                <li>Use <a href="../language/dew.html">Dew routing and middleware</a> for backend logic</li>
+                <li>Explore <a href="../stdlib/dew.html">advanced DEW features</a> like WebSockets and sessions</li>
+            </ul>
+
+        </main>
+    </div>
+    <script src="../js/main.js"></script>
+</body>
+
+</html>
